@@ -46,13 +46,11 @@ public class Person {
         }
     }
 
-    public Person()
-    {
+    public Person() {
         setName("Unknown");
         setSurname("Unknown");
         setPersonCode("000000-00000");
     }
-
     public Person(String name, String surname, String personCode ) {
         setName(name);
         setSurname(surname);
