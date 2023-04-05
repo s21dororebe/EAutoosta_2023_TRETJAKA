@@ -1,7 +1,8 @@
 package model;
 
+import model.enumerators.BusCategory;
+
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class BusDriver extends Employee {
     private final ArrayList<BusCategory> driveCategories = new ArrayList<>();

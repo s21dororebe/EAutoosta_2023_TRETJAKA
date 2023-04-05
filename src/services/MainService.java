@@ -1,6 +1,6 @@
 package services;
 
-import model.BusCategory;
+import model.enumerators.BusCategory;
 import model.BusDriver;
 import model.Employee;
 import model.Person;
