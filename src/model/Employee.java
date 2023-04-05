@@ -1,5 +1,7 @@
 package model;
 
+import model.extraClasses.Date;
+
 import java.time.LocalDate;
 
 public class Employee extends Person{

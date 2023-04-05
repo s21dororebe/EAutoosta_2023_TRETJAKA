@@ -4,6 +4,7 @@ import model.enumerators.BusCategory;
 import model.BusDriver;
 import model.Employee;
 import model.Person;
+import model.extraClasses.WorkingTime;
 
 public class MainService {
     public static void main(String[] args) {
@@ -26,6 +27,9 @@ public class MainService {
             System.out.println(bd2);
             bd2.removeCategory(BusCategory.schoolbus);
             System.out.println(bd2);
+
+            WorkingTime wt1 = new WorkingTime(2, 15, 16, 5);
+            System.out.println("WorkingTime: " + wt1);
 
         } catch (Exception e){
             System.out.println(e);
