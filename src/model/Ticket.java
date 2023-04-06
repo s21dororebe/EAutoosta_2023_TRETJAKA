@@ -1,8 +1,10 @@
 package model;
 
-import model.enumerators.City;
 import model.extraClasses.Date;
-import model.extraClasses.WorkingTime;
+import model.extraClasses.Time;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Ticket {
     /*
@@ -12,58 +14,106 @@ public class Ticket {
 
     private final long generatedId;
     private static long idCounter = 0;
-    private Date ticketPurchaseDate;
-    private WorkingTime ticketPurchaseTime;
+    private Date ticketPurchaseDate; //done
+    private Time ticketPurchaseTime; //done
     private double discount = 0;
     private double price = 0;
     private Cashier cashierPerson;
     private boolean isVIP = false;
 
-    public WorkingTime getTicketPurchaseTime() {
+    public Date getTicketPurchaseDate() {
+        return ticketPurchaseDate;
+    }
+    public double getDiscount() {
+        return discount;
+    }
+    public double getPrice() {
+        return price;
+    }
+    public Cashier getCashierPerson() {
+        return cashierPerson;
+    }
+
+    //date is now
+    public void setTicketPurchaseDate() {
+        ticketPurchaseDate = new Date(LocalDate.now().getYear(), LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth());
+    }
+    //date is inputted manually
+    public void setTicketPurchaseDate(Date ticketPurchaseDate) {
+        if(ticketPurchaseDate != null)
+            this.ticketPurchaseDate = ticketPurchaseDate;
+    }
+    public void setTicketPurchaseDate(int year, int month, int day) {
+        ticketPurchaseDate = new Date(year, month, day);
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    public void setCashierPerson(Cashier cashierPerson) {
+        this.cashierPerson = cashierPerson;
+    }
+
+    public boolean isVIP() {
+        return isVIP;
+    }
+    public void setVIP(boolean VIP) {
+        isVIP = VIP;
+    }
+
+    public Time getTicketPurchaseTime() {
         return ticketPurchaseTime;
     }
-    public void setTicketPurchaseTime(WorkingTime inputTicketPurchaseTime) throws Exception {
-        ticketPurchaseTime = new WorkingTime(inputTicketPurchaseTime.getStartHour(),
-                inputTicketPurchaseTime.getStartMinute(),
-                inputTicketPurchaseTime.getEndHour(),
-                inputTicketPurchaseTime.getEndMinute());
+    public void setTicketPurchaseTime() throws Exception {
+        ticketPurchaseTime = new Time(LocalTime.now().getHour(), LocalTime.now().getMinute());
     }
-    public void setTicketPurchaseTime(int startHour, int endHour) throws Exception {
-        ticketPurchaseTime = new WorkingTime(startHour, endHour);
+    public void setTicketPurchaseTime(Time inputTicketPurchaseTime) throws Exception {
+        ticketPurchaseTime = new Time(inputTicketPurchaseTime.getHour(), inputTicketPurchaseTime.getMinute());
     }
-    public void setTicketPurchaseTime(int startHour, int startMinute, int endHour, int endMinute) throws Exception {
-        ticketPurchaseTime = new WorkingTime(startHour, startMinute, endHour, endMinute);
+    public void setTicketPurchaseTime(int hour) throws Exception {
+        ticketPurchaseTime = new Time(hour);
+    }
+    public void setTicketPurchaseTime(int hour, int minute) throws Exception {
+        ticketPurchaseTime = new Time(hour, minute);
     }
 
-    public Station() throws Exception {
+    public Ticket() throws Exception {
         generatedId = idCounter;
         idCounter++;
-        setTitle("Unknown");
     }
-    public Station(String title, City city, WorkingTime workingTime) throws Exception {
-        generatedId = idCounter;
-        idCounter++;
-
-        setTitle(title);
-        setCity(city);
-        setWorkingTime(workingTime);
-    }
-    public Station(String title, City city, int startHour, int endHour) throws Exception {
+    public Ticket(Time ticketPurchaseTime) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
-        setTitle(title);
-        setCity(city);
-        setWorkingTime(startHour, endHour);
+        setTicketPurchaseTime(ticketPurchaseTime);
     }
-    public Station(String title, City city, int startHour, int startMinute, int endHour, int endMinute) throws Exception {
+    public Ticket(int startHour, int endHour) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
-        setTitle(title);
-        setCity(city);
-        setWorkingTime(startHour, startMinute, endHour, endMinute);
+        setTicketPurchaseTime(startHour, endHour);
+    }
+    public Ticket(int startHour, int startMinute, int endHour, int endMinute) throws Exception {
+        generatedId = idCounter;
+        idCounter++;
+
+        setTicketPurchaseTime(startHour, startMinute, endHour, endMinute);
     }
 
-
+    //TODO toString function
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "generatedId=" + generatedId +
+                ", ticketPurchaseDate=" + ticketPurchaseDate +
+                ", ticketPurchaseTime=" + ticketPurchaseTime +
+                ", discount=" + discount +
+                ", price=" + price +
+                ", cashierPerson=" + cashierPerson +
+                ", isVIP=" + isVIP +
+                '}';
+    }
 }
