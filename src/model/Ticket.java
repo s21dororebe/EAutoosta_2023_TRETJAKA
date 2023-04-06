@@ -7,11 +7,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Ticket {
-    /*
-    * Ticket (5 punkti) - paredzēta biļešu izveidei. Ir jābūt unikālam id, biļetes iegādes datumam
-    * un laikam, atlaidei (procentos), cenai, kasierim, kurš pārdeva biļeti,
-    * un informācijai par to, vai biļete ir VIP biļete vai ne*/
-
     private final long generatedId;
     private static long idCounter = 0;
     private Date ticketPurchaseDate; //done
@@ -67,9 +62,11 @@ public class Ticket {
     public Time getTicketPurchaseTime() {
         return ticketPurchaseTime;
     }
+    //time is now
     public void setTicketPurchaseTime() throws Exception {
         ticketPurchaseTime = new Time(LocalTime.now().getHour(), LocalTime.now().getMinute());
     }
+    //time is inputted manually
     public void setTicketPurchaseTime(Time inputTicketPurchaseTime) throws Exception {
         ticketPurchaseTime = new Time(inputTicketPurchaseTime.getHour(), inputTicketPurchaseTime.getMinute());
     }
@@ -83,24 +80,58 @@ public class Ticket {
     public Ticket() throws Exception {
         generatedId = idCounter;
         idCounter++;
+
+        setTicketPurchaseTime(); //time now
+        setTicketPurchaseDate(); //date today
     }
     public Ticket(Time ticketPurchaseTime) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
         setTicketPurchaseTime(ticketPurchaseTime);
+        setTicketPurchaseDate(); //date today
     }
-    public Ticket(int startHour, int endHour) throws Exception {
+    public Ticket(Date ticketPurchaseDate) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
-        setTicketPurchaseTime(startHour, endHour);
+        setTicketPurchaseTime(); //time now
+        setTicketPurchaseDate(ticketPurchaseDate);
     }
-    public Ticket(int startHour, int startMinute, int endHour, int endMinute) throws Exception {
+    public Ticket(int hour, int minute) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
-        setTicketPurchaseTime(startHour, startMinute, endHour, endMinute);
+        setTicketPurchaseTime(hour, minute);
+        setTicketPurchaseDate(); //date today
+    }
+    public Ticket(int hour) throws Exception {
+        generatedId = idCounter;
+        idCounter++;
+
+        setTicketPurchaseTime(hour);
+        setTicketPurchaseDate(); //date today
+    }
+    public Ticket(int year, int month, int day) throws Exception {
+        generatedId = idCounter;
+        idCounter++;
+
+        setTicketPurchaseTime(); //time now
+        setTicketPurchaseDate(year, month, day);
+    }
+    public Ticket(int hour, int minute, int year, int month, int day) throws Exception {
+        generatedId = idCounter;
+        idCounter++;
+
+        setTicketPurchaseTime(hour, minute);
+        setTicketPurchaseDate(year, month, day);
+    }
+    public Ticket(Time ticketPurchaseTime, Date ticketPurchaseDate) throws Exception {
+        generatedId = idCounter;
+        idCounter++;
+
+        setTicketPurchaseTime(ticketPurchaseTime);
+        setTicketPurchaseDate(ticketPurchaseDate);
     }
 
     //TODO toString function
