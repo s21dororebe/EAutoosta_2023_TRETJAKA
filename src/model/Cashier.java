@@ -22,4 +22,9 @@ public class Cashier extends Employee {
         generatedId = idCounter;
         idCounter++;
     }
+
+    public String toString() {
+        return "" + generatedId + ": " + super.toString();
+    }
+
 }
