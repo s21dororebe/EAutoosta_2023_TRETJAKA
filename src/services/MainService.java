@@ -1,9 +1,11 @@
 package services;
 
+import model.Station;
 import model.enumerators.BusCategory;
 import model.BusDriver;
 import model.Employee;
 import model.Person;
+import model.enumerators.City;
 import model.extraClasses.WorkingTime;
 
 public class MainService {
@@ -28,8 +30,19 @@ public class MainService {
             bd2.removeCategory(BusCategory.schoolbus);
             System.out.println(bd2);
 
-            WorkingTime wt1 = new WorkingTime(2, 15, 16, 5);
+            WorkingTime wt1 = new WorkingTime(0, 0, 23, 59);
             System.out.println("WorkingTime: " + wt1);
+
+            System.out.println("Stations:");
+            for(int i = 0; i < 10; i++)
+                new Station();
+            Station st2 = new Station("First station", City.Ventspils, wt1);
+            Station st3 = new Station("Second station", City.Daugavpils, 6, 20);
+            Station st4 = new Station("Third station", City.Jelgava, 5, 0, 23, 59);
+            System.out.println(st2);
+            System.out.println(st3);
+            System.out.println(st4);
+
 
         } catch (Exception e){
             System.out.println(e);
