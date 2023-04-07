@@ -78,7 +78,7 @@ public class Ticket {
         ticketPurchaseTime = new Time(LocalTime.now().getHour(), LocalTime.now().getMinute());
     }
     //time is inputted manually
-    public void setTicketPurchaseTimebyTimeObject(Time inputTicketPurchaseTime) throws Exception {
+    public void setTicketPurchaseTimeByTimeObject(Time inputTicketPurchaseTime) throws Exception {
         ticketPurchaseTime = new Time(inputTicketPurchaseTime.getHour(), inputTicketPurchaseTime.getMinute());
     }
     public void setTicketPurchaseTimeByHour(int hour) throws Exception {
@@ -103,7 +103,7 @@ public class Ticket {
         generatedId = idCounter;
         idCounter++;
         try {
-            setTicketPurchaseTimebyTimeObject(ticketPurchaseTime);
+            setTicketPurchaseTimeByTimeObject(ticketPurchaseTime);
             setTicketPurchaseDate(); //date today
             setPrice(inputPrice);
             setDiscount(inputDiscount);
@@ -193,7 +193,7 @@ public class Ticket {
         idCounter++;
 
         try {
-            setTicketPurchaseTimebyTimeObject(ticketPurchaseTime);
+            setTicketPurchaseTimeByTimeObject(ticketPurchaseTime);
             setTicketPurchaseDateByDateObject(ticketPurchaseDate);
             setPrice(inputPrice);
             setDiscount(inputDiscount);
@@ -204,6 +204,9 @@ public class Ticket {
         }
     }
 
+    //TODO euro symbol
+    //TODO price view is: 10.5; needs to be: 10,50 euro
+    //TODO discount view 0.0 => 0%
     @Override
     public String toString() {
         return "Ticket " + generatedId + ": " + ticketPurchaseTime + " "

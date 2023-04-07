@@ -22,6 +22,11 @@ public class Cashier extends Employee {
         generatedId = idCounter;
         idCounter++;
     }
+    public Cashier(Employee employeeData) throws Exception {
+        super(employeeData, employeeData.getContractDate().getYear(), employeeData.getContractDate().getMonth(), employeeData.getContractDate().getDay());
+        generatedId = idCounter;
+        idCounter++;
+    }
 
     public String toString() {
         return "" + generatedId + ": " + super.toString();

@@ -3,6 +3,7 @@ package services;
 import model.*;
 import model.enumerators.BusCategory;
 import model.enumerators.City;
+import model.enumerators.VIPticket;
 import model.extraClasses.Date;
 import model.extraClasses.Time;
 import model.extraClasses.WorkingTime;
@@ -14,8 +15,17 @@ public class MainService {
             Person p2 = new Person();
             Employee e1 = new Employee(p1, 2023, 3, 24);
             Employee e2 = new Employee(p2, 2023, 6, 20);
+            Employee e3 = new Employee("Svetlana", "Ko", "124556-26354", 2023, 6, 20);
             BusDriver bd1 = new BusDriver(p1, 2023, 3, 24, 0);
             BusDriver bd2 = new BusDriver(e2, 5);
+            Cashier cashier1 = new Cashier(p1, 2023, 12, 1);
+            Cashier cashier2 = new Cashier(e1);
+            Cashier cashier3 = new Cashier(e3);
+
+            System.out.println("Cashiers:");
+            System.out.println(cashier1);
+            System.out.println(cashier2);
+            System.out.println("------------------------------------------------");
 
             System.out.println(p1);
             System.out.println(e1);
@@ -58,13 +68,13 @@ public class MainService {
             System.out.println("------------------------------------------------");
 
             System.out.println("Tickets");
-            Ticket t1 = new Ticket();
-            Ticket t2 = new Ticket();
-            Ticket t3 = new Ticket();
-            Ticket t4 = new Ticket();
-            Ticket t5 = new Ticket();
-            Ticket t6 = new Ticket();
-            Ticket t7 = new Ticket();
+            Ticket t1 = new Ticket(time1, 10.50, 0, VIPticket.notVIP, cashier1);
+            Ticket t2 = new Ticket(date1, 12, 20, VIPticket.isVIP, cashier3);
+            Ticket t3 = new Ticket(12, 25, 25, 0, VIPticket.isVIP, cashier3);
+            Ticket t4 = new Ticket(12, 25, 20, VIPticket.notVIP, cashier3);
+            Ticket t5 = new Ticket(2023, 6, 25, 25, 20, VIPticket.isVIP, cashier3);
+            Ticket t6 = new Ticket(12, 33, 2023, 7, 20, 60, 50, VIPticket.isVIP, cashier1);
+            Ticket t7 = new Ticket(time1, date1, 20, 0, VIPticket.isVIP, cashier3);
             System.out.println(t1);
             System.out.println(t2);
             System.out.println(t3);
