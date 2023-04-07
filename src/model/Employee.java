@@ -46,23 +46,31 @@ public class Employee extends Person{
     }
     public Employee(String name, String surname, String personCode, int yearOfContract, int monthOfContract, int dateOfContract) throws Exception {
         super(name, surname, personCode);
+        try {
+            setContractNumber(name, surname);
+        } catch (Exception e){
+            throw (new Exception ("Wrong name and/or surname"));
+        }
         setContractNumber(name, surname);
         try {
             setContractDate(yearOfContract, monthOfContract, dateOfContract);
         } catch (Exception e){
-            throw (new Exception ("Wrong data"));
+            throw (new Exception ("Wrong data (year/month/day)"));
         }
-
     }
     public Employee(Person personData, int yearOfContract, int monthOfContract, int dateOfContract) throws Exception {
         super(personData.getName(),
                 personData.getSurname(),
                 personData.getPersonCode());
-        setContractNumber(personData.getName(), personData.getSurname());
+        try {
+            setContractNumber(personData.getName(), personData.getSurname());
+        } catch (Exception e){
+            throw (new Exception ("Wrong name and/or surname"));
+        }
         try {
             setContractDate(yearOfContract, monthOfContract, dateOfContract);
         } catch (Exception e){
-            throw (new Exception ("Wrong data"));
+            throw (new Exception ("Wrong data (year/month/day)"));
         }
     }
 

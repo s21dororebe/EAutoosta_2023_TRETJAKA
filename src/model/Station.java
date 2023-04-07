@@ -31,20 +31,20 @@ public class Station {
     public WorkingTime getWorkingTime() {
         return workingTime;
     }
-    public void setWorkingTime(WorkingTime inputWorkingTime) throws Exception {
+    public void setWorkingTimeByWorkingTimeObject(WorkingTime inputWorkingTime) throws Exception {
         workingTime = new WorkingTime(inputWorkingTime.getStartHour(),
                 inputWorkingTime.getStartMinute(),
                 inputWorkingTime.getEndHour(),
                 inputWorkingTime.getEndMinute());
     }
-    public void setWorkingTime(int startHour, int endHour) throws Exception {
+    public void setWorkingTimeByHours(int startHour, int endHour) throws Exception {
         workingTime = new WorkingTime(startHour, endHour);
     }
-    public void setWorkingTime(int startHour, int startMinute, int endHour, int endMinute) throws Exception {
+    public void setWorkingTimeByHoursAndMinutes(int startHour, int startMinute, int endHour, int endMinute) throws Exception {
         workingTime = new WorkingTime(startHour, startMinute, endHour, endMinute);
     }
 
-    public Station() throws Exception {
+    public Station() {
         generatedId = idCounter;
         idCounter++;
         setTitle("Unknown");
@@ -52,26 +52,35 @@ public class Station {
     public Station(String title, City city, WorkingTime workingTime) throws Exception {
         generatedId = idCounter;
         idCounter++;
-
-        setTitle(title);
-        setCity(city);
-        setWorkingTime(workingTime);
+        try {
+            setTitle(title);
+            setCity(city);
+            setWorkingTimeByWorkingTimeObject(workingTime);
+        } catch (Exception e){
+            throw (new Exception("Wrong input data (title/city/working hours)"));
+        }
     }
     public Station(String title, City city, int startHour, int endHour) throws Exception {
         generatedId = idCounter;
         idCounter++;
-
-        setTitle(title);
-        setCity(city);
-        setWorkingTime(startHour, endHour);
+        try {
+            setTitle(title);
+            setCity(city);
+            setWorkingTimeByHours(startHour, endHour);
+        } catch (Exception e){
+            throw (new Exception("Wrong input data (title/city/working hours)"));
+        }
     }
     public Station(String title, City city, int startHour, int startMinute, int endHour, int endMinute) throws Exception {
         generatedId = idCounter;
         idCounter++;
-
-        setTitle(title);
-        setCity(city);
-        setWorkingTime(startHour, startMinute, endHour, endMinute);
+        try {
+            setTitle(title);
+            setCity(city);
+            setWorkingTimeByHoursAndMinutes(startHour, startMinute, endHour, endMinute);
+        } catch (Exception e){
+            throw (new Exception("Wrong input data (title/city/working hours)"));
+        }
     }
 
     @Override

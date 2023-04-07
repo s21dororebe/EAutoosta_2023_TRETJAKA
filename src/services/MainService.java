@@ -1,11 +1,10 @@
 package services;
 
-import model.Station;
+import model.*;
 import model.enumerators.BusCategory;
-import model.BusDriver;
-import model.Employee;
-import model.Person;
 import model.enumerators.City;
+import model.extraClasses.Date;
+import model.extraClasses.Time;
 import model.extraClasses.WorkingTime;
 
 public class MainService {
@@ -43,6 +42,36 @@ public class MainService {
             System.out.println(st3);
             System.out.println(st4);
 
+            System.out.println("------------------------------------------------");
+            System.out.println("Time:");
+            Time time0 = new Time(0, 0);
+            Time time1 = new Time(12, 20);
+            System.out.println(time0);
+            System.out.println(time1);
+            System.out.println("------------------------------------------------");
+
+            System.out.println("Date:");
+            Date date0 = new Date(0, 0, 0);
+            Date date1 = new Date(2012, 11, 20);
+            System.out.println(date0);
+            System.out.println(date1);
+            System.out.println("------------------------------------------------");
+
+            System.out.println("Tickets");
+            Ticket t1 = new Ticket();
+            Ticket t2 = new Ticket();
+            Ticket t3 = new Ticket();
+            Ticket t4 = new Ticket();
+            Ticket t5 = new Ticket();
+            Ticket t6 = new Ticket();
+            Ticket t7 = new Ticket();
+            System.out.println(t1);
+            System.out.println(t2);
+            System.out.println(t3);
+            System.out.println(t4);
+            System.out.println(t5);
+            System.out.println(t6);
+            System.out.println(t7);
 
         } catch (Exception e){
             System.out.println(e);

@@ -11,22 +11,18 @@ public class Time {
         return minute;
     }
 
-    public void setHour(int inputHour) throws Exception {
+    public void setHour(int inputHour) {
         if(inputHour >= 0 && inputHour <= 23){
             hour = inputHour;
-        } else {
-            throw (new Exception("Wrong input data"));
         }
     }
-    public void setMinute(int inputMinute) throws Exception {
+    public void setMinute(int inputMinute) {
         if(inputMinute >= 0 && inputMinute <= 59){
             minute = inputMinute;
-        } else {
-            throw (new Exception("Wrong input data"));
         }
     }
 
-    public Time() throws Exception {
+    public Time() {
         setHour(0);
         setMinute(0);
     }
@@ -34,7 +30,7 @@ public class Time {
         try {
             setHour(hour);
         } catch (Exception e){
-            throw (new Exception("Wrong input data"));
+            throw (new Exception("Wrong input hour"));
         }
         setMinute(0);
     }
@@ -43,7 +39,7 @@ public class Time {
             setHour(hour);
             setMinute(minute);
         } catch (Exception e){
-            throw (new Exception("Wrong input data"));
+            throw (new Exception("Wrong input hour and minute"));
         }
     }
 

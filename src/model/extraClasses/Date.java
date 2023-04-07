@@ -38,16 +38,21 @@ public class Date {
         }
     }
 
-    public Date(){
+    public Date() {
         setYear(1900);
         setMonth(1);
         setDay(1);
     }
 
-    public Date(int year, int month, int day) {
-        setYear(year);
-        setMonth(month);
-        setDay(day);
+    public Date(int year, int month, int day) throws Exception {
+        try {
+            setYear(year);
+            setMonth(month);
+            setDay(day);
+        } catch (Exception e) {
+            throw (new Exception("Wrong input date data"));
+        }
+        
     }
 
     @Override

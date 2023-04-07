@@ -16,24 +16,34 @@ public class BusDriver extends Employee {
         return expYears;
     }
     public void setExpYears(int inputExpYears) {
-        if(inputExpYears >= 0){
+        if(inputExpYears >= 0 && inputExpYears <= 70){
             expYears = inputExpYears;
         }
     }
 
-    public BusDriver() throws Exception {
-    }
     public BusDriver(String name, String surname, String personCode, int yearOfContract, int monthOfContract, int dateOfContract, int inputExpYears) throws Exception {
         super(name, surname, personCode, yearOfContract, monthOfContract, dateOfContract);
-        setExpYears(inputExpYears);
+        try {
+            setExpYears(inputExpYears);
+        } catch (Exception e){
+            throw (new Exception("Wrong input experience years"));
+        }
     }
     public BusDriver(Person personData, int yearOfContract, int monthOfContract, int dateOfContract, int inputExpYears) throws Exception {
         super(personData, yearOfContract, monthOfContract, dateOfContract);
-        setExpYears(inputExpYears);
+        try {
+            setExpYears(inputExpYears);
+        } catch (Exception e){
+            throw (new Exception("Wrong input experience years"));
+        }
     }
     public BusDriver(Employee employerData, int inputExpYears) throws Exception {
         super(employerData.getName(), employerData.getSurname(), employerData.getPersonCode(), employerData.getContractDate().getYear(), employerData.getContractDate().getMonth(), employerData.getContractDate().getDay());
-        setExpYears(inputExpYears);
+        try {
+            setExpYears(inputExpYears);
+        } catch (Exception e){
+            throw (new Exception("Wrong input experience years"));
+        }
     }
 
     public void addCategory(BusCategory category) throws Exception {

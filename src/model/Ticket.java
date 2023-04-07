@@ -34,49 +34,40 @@ public class Ticket {
     }
 
     //date is now
-    public void setTicketPurchaseDate() {
+    public void setTicketPurchaseDate() throws Exception {
         ticketPurchaseDate = new Date(LocalDate.now().getYear(), LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth());
     }
     //date is inputted manually
-    public void setTicketPurchaseDate(Date ticketPurchaseDate) {
+    public void setTicketPurchaseDateByDateObject(Date ticketPurchaseDate) {
         if(ticketPurchaseDate != null)
             this.ticketPurchaseDate = ticketPurchaseDate;
     }
-    public void setTicketPurchaseDate(int year, int month, int day) {
+    public void setTicketPurchaseDateByYearMonthDay(int year, int month, int day) throws Exception {
         ticketPurchaseDate = new Date(year, month, day);
     }
 
-    public void setDiscount(double inputDiscount) throws Exception {
+    public void setDiscount(double inputDiscount) {
         if(inputDiscount >= 0){
             discount = inputDiscount;
-        } else {
-            throw (new Exception("Invalid input discount data"));
         }
     }
-    public void setPrice(double inputPrice) throws Exception {
+    public void setPrice(double inputPrice) {
         if(inputPrice >= 0){
             if(discount > 0) {
                 price = inputPrice - (inputPrice / 100 * discount);
             } else price = inputPrice;
-        } else {
-            throw (new Exception("Invalid input price data"));
         }
     }
-    public void setCashierPerson(Cashier inputCashierPerson) throws Exception {
+    public void setCashierPerson(Cashier inputCashierPerson) {
         if(inputCashierPerson != null){
             cashierPerson = inputCashierPerson;
-        } else {
-            throw (new Exception("Invalid input data about cashier"));
         }
     }
-    public void setVIP(VIPticket inputVIP) throws Exception {
+    public void setVIP(VIPticket inputVIP) {
         if(inputVIP == VIPticket.isVIP)
             isVIP = true;
         else if(inputVIP == VIPticket.notVIP)
             isVIP = false;
-        else
-            throw (new Exception("Invalid 'is it VIP ticket' input"));
-
     }
 
     public Time getTicketPurchaseTime() {
@@ -87,13 +78,13 @@ public class Ticket {
         ticketPurchaseTime = new Time(LocalTime.now().getHour(), LocalTime.now().getMinute());
     }
     //time is inputted manually
-    public void setTicketPurchaseTime(Time inputTicketPurchaseTime) throws Exception {
+    public void setTicketPurchaseTimebyTimeObject(Time inputTicketPurchaseTime) throws Exception {
         ticketPurchaseTime = new Time(inputTicketPurchaseTime.getHour(), inputTicketPurchaseTime.getMinute());
     }
-    public void setTicketPurchaseTime(int hour) throws Exception {
+    public void setTicketPurchaseTimeByHour(int hour) throws Exception {
         ticketPurchaseTime = new Time(hour);
     }
-    public void setTicketPurchaseTime(int hour, int minute) throws Exception {
+    public void setTicketPurchaseTimeByHourAndMinute(int hour, int minute) throws Exception {
         ticketPurchaseTime = new Time(hour, minute);
     }
 
@@ -111,10 +102,9 @@ public class Ticket {
     public Ticket(Time ticketPurchaseTime, double inputPrice, double inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
         generatedId = idCounter;
         idCounter++;
-
-        setTicketPurchaseTime(ticketPurchaseTime);
-        setTicketPurchaseDate(); //date today
         try {
+            setTicketPurchaseTimebyTimeObject(ticketPurchaseTime);
+            setTicketPurchaseDate(); //date today
             setPrice(inputPrice);
             setDiscount(inputDiscount);
             setVIP(inputVIP);
@@ -127,9 +117,9 @@ public class Ticket {
         generatedId = idCounter;
         idCounter++;
 
-        setTicketPurchaseTime(); //time now
-        setTicketPurchaseDate(ticketPurchaseDate);
         try {
+            setTicketPurchaseTime(); //time now
+            setTicketPurchaseDateByDateObject(ticketPurchaseDate);
             setPrice(inputPrice);
             setDiscount(inputDiscount);
             setVIP(inputVIP);
@@ -142,9 +132,9 @@ public class Ticket {
         generatedId = idCounter;
         idCounter++;
 
-        setTicketPurchaseTime(hour, minute);
-        setTicketPurchaseDate(); //date today
         try {
+            setTicketPurchaseTimeByHourAndMinute(hour, minute);
+            setTicketPurchaseDate(); //date today
             setPrice(inputPrice);
             setDiscount(inputDiscount);
             setVIP(inputVIP);
@@ -157,9 +147,9 @@ public class Ticket {
         generatedId = idCounter;
         idCounter++;
 
-        setTicketPurchaseTime(hour);
-        setTicketPurchaseDate(); //date today
         try {
+            setTicketPurchaseTimeByHour(hour);
+            setTicketPurchaseDate(); //date today
             setPrice(inputPrice);
             setDiscount(inputDiscount);
             setVIP(inputVIP);
@@ -172,9 +162,9 @@ public class Ticket {
         generatedId = idCounter;
         idCounter++;
 
-        setTicketPurchaseTime(); //time now
-        setTicketPurchaseDate(year, month, day);
         try {
+            setTicketPurchaseTime(); //time now
+            setTicketPurchaseDateByYearMonthDay(year, month, day);
             setPrice(inputPrice);
             setDiscount(inputDiscount);
             setVIP(inputVIP);
@@ -187,9 +177,9 @@ public class Ticket {
         generatedId = idCounter;
         idCounter++;
 
-        setTicketPurchaseTime(hour, minute);
-        setTicketPurchaseDate(year, month, day);
         try {
+            setTicketPurchaseTimeByHourAndMinute(hour, minute);
+            setTicketPurchaseDateByYearMonthDay(year, month, day);
             setPrice(inputPrice);
             setDiscount(inputDiscount);
             setVIP(inputVIP);
@@ -202,9 +192,9 @@ public class Ticket {
         generatedId = idCounter;
         idCounter++;
 
-        setTicketPurchaseTime(ticketPurchaseTime);
-        setTicketPurchaseDate(ticketPurchaseDate);
         try {
+            setTicketPurchaseTimebyTimeObject(ticketPurchaseTime);
+            setTicketPurchaseDateByDateObject(ticketPurchaseDate);
             setPrice(inputPrice);
             setDiscount(inputDiscount);
             setVIP(inputVIP);
@@ -214,7 +204,6 @@ public class Ticket {
         }
     }
 
-    //TODO toString function
     @Override
     public String toString() {
         return "Ticket " + generatedId + ": " + ticketPurchaseTime + " "
