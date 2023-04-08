@@ -3,6 +3,7 @@ package model;
 import model.extraClasses.Date;
 import model.extraClasses.Time;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.PriorityQueue;
 
@@ -52,12 +53,34 @@ public class BusTrip {
     public void setStationTo(Station stationTo) {
         this.stationTo = stationTo;
     }
-    public void setDateFrom(Date dateFrom) {
-        this.dateFrom = dateFrom;
+
+    //---------------------------------------------------------------------------------------------
+
+    //DATE
+
+    public void setDateFrom() throws Exception {
+        dateFrom = new Date(LocalDate.now().getYear(), LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth());
     }
-    public void setDateTo(Date dateTo) {
-        this.dateTo = dateTo;
+    public void setDateFromByDateObject(Date inputDateFrom) {
+        if(dateFrom != null)
+            dateFrom = inputDateFrom;
     }
+    public void setDateFromByYearMonthDay(int year, int month, int day) throws Exception {
+        dateFrom = new Date(year, month, day);
+    }
+
+    public void setDateTo() throws Exception {
+        dateTo = new Date(LocalDate.now().getYear(), LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth());
+    }
+    public void setDateToByDateObject(Date inputDateTo) {
+        if(dateTo != null)
+            dateTo = inputDateTo;
+    }
+    public void setDateToByYearMonthDay(int year, int month, int day) throws Exception {
+        dateTo = new Date(year, month, day);
+    }
+
+
     //---------------------------------------------------------------------------------------------
 
     //TIME
