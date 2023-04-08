@@ -12,6 +12,7 @@ public class BusTrip {
     private static long idCounter = 0;
     private Station stationFrom;
     private Station stationTo;
+    //TODO test set functions for date and time
     private Date dateFrom; //done ---> need to test
     private Date dateTo; //done ---> need to test
     private Time timeFrom; //done ---> need to test
@@ -128,11 +129,6 @@ public class BusTrip {
         }
 
     }
-    public void setTimeFromByHour(int hour) throws Exception {
-        if(hour >= LocalTime.now().getHour()){
-            timeFrom = new Time(hour);
-        }
-    }
     public void setTimeFromByHourAndMinute(int hour, int minute) throws Exception {
         if(hour >= LocalTime.now().getHour()){
             if(hour == LocalTime.now().getHour()){
@@ -159,11 +155,6 @@ public class BusTrip {
                     timeTo = new Time(inputTimeTo.getHour(), inputTimeTo.getMinute());
                 }
             }
-        }
-    }
-    public void setTimeToByHour(int hour) throws Exception {
-        if(hour >= LocalTime.now().getHour()){
-            timeTo = new Time(hour);
         }
     }
     public void setTimeToByHourAndMinute(int hour, int minute) throws Exception {
@@ -198,92 +189,54 @@ public class BusTrip {
         setDateFrom();
         setDateTo();
     }
-    public BusTrip(Time timeFrom, Time timeTo) throws Exception {
-        generatedId = idCounter;
-        idCounter++;
-        try {
-            setTimeFrom();
-            setTimeTo();
-            setDateFrom();
-            setDateTo();
-        } catch(Exception e) {
-            throw (new Exception("Invalid input data"));
-        }
-    }
-    public BusTrip(Date ticketPurchaseDate) throws Exception {
+    public BusTrip(Time timeFrom, Time timeTo, int yearFrom, int monthFrom, int dayFrom, int yearTo, int monthTo, int dayTo) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
         try {
-            setTimeFrom();
-            setTimeTo();
-            setDateFrom();
-            setDateTo();
+            setTimeFromByTimeObject(timeFrom);
+            setTimeToByTimeObject(timeTo);
+            setDateFromByYearMonthDay(yearFrom, monthFrom, dayFrom);
+            setDateToByYearMonthDay(yearTo, monthTo, dayTo);
         } catch(Exception e) {
             throw (new Exception("Invalid input data"));
         }
     }
-    public BusTrip(int hour, int minute) throws Exception {
+    public BusTrip(int hourFrom, int minuteFrom, int hourTo, int minuteTo, Date dateFrom, Date dateTo) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
         try {
-            setTimeFrom();
-            setTimeTo();
-            setDateFrom();
-            setDateTo();
+            setTimeFromByHourAndMinute(hourFrom, minuteFrom);
+            setTimeToByHourAndMinute(hourTo, minuteTo);
+            setDateFromByDateObject(dateFrom);
+            setDateToByDateObject(dateTo);
         } catch(Exception e) {
             throw (new Exception("Invalid input data"));
         }
     }
-    public BusTrip(int hour) throws Exception {
+    public BusTrip(int hourFrom, int minuteFrom, int hourTo, int minuteTo, int yearFrom, int monthFrom, int dayFrom, int yearTo, int monthTo, int dayTo) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
         try {
-            setTimeFrom();
-            setTimeTo();
-            setDateFrom();
-            setDateTo();
+            setTimeFromByHourAndMinute(hourFrom, minuteFrom);
+            setTimeToByHourAndMinute(hourTo, minuteTo);
+            setDateFromByYearMonthDay(yearFrom, monthFrom, dayFrom);
+            setDateToByYearMonthDay(yearTo, monthTo, dayTo);
         } catch(Exception e) {
             throw (new Exception("Invalid input data"));
         }
     }
-    public BusTrip(int year, int month, int day) throws Exception {
+    public BusTrip(Time timeFrom, Time timeTo, Date dateFrom, Date dateTo) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
         try {
-            setTimeFrom();
-            setTimeTo();
-            setDateFrom();
-            setDateTo();
-        } catch(Exception e) {
-            throw (new Exception("Invalid input data"));
-        }
-    }
-    public BusTrip(int hour, int minute, int year, int month, int day) throws Exception {
-        generatedId = idCounter;
-        idCounter++;
-
-        try {
-            setTimeFrom();
-            setTimeTo();
-            setDateFrom();
-            setDateTo();
-        } catch(Exception e) {
-            throw (new Exception("Invalid input data"));
-        }
-    }
-    public BusTrip(Time ticketPurchaseTime, Date ticketPurchaseDate) throws Exception {
-        generatedId = idCounter;
-        idCounter++;
-
-        try {
-            setTimeFrom();
-            setTimeTo();
-            setDateFrom();
-            setDateTo();
+            setTimeFromByTimeObject(timeFrom);
+            setTimeToByTimeObject(timeTo);
+            setDateFromByDateObject(dateFrom);
+            setDateToByDateObject(dateTo);
         } catch(Exception e) {
             throw (new Exception("Invalid input data"));
         }

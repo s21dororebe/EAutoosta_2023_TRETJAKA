@@ -99,72 +99,12 @@ public class Ticket {
         setVIP(VIPticket.notVIP);
         setCashierPerson(new Cashier());
     }
-    public Ticket(Time ticketPurchaseTime, double inputPrice, double inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
+    public Ticket(Time ticketPurchaseTime, Date ticketPurchaseDate, double inputPrice, double inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
         generatedId = idCounter;
         idCounter++;
         try {
             setTicketPurchaseTimeByTimeObject(ticketPurchaseTime);
-            setTicketPurchaseDate(); //date today
-            setPrice(inputPrice);
-            setDiscount(inputDiscount);
-            setVIP(inputVIP);
-            setCashierPerson(inputCashierPerson);
-        } catch(Exception e) {
-            throw (new Exception("Invalid input data"));
-        }
-    }
-    public Ticket(Date ticketPurchaseDate, double inputPrice, double inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
-        generatedId = idCounter;
-        idCounter++;
-
-        try {
-            setTicketPurchaseTime(); //time now
             setTicketPurchaseDateByDateObject(ticketPurchaseDate);
-            setPrice(inputPrice);
-            setDiscount(inputDiscount);
-            setVIP(inputVIP);
-            setCashierPerson(inputCashierPerson);
-        } catch(Exception e) {
-            throw (new Exception("Invalid input data"));
-        }
-    }
-    public Ticket(int hour, int minute, double inputPrice, double inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
-        generatedId = idCounter;
-        idCounter++;
-
-        try {
-            setTicketPurchaseTimeByHourAndMinute(hour, minute);
-            setTicketPurchaseDate(); //date today
-            setPrice(inputPrice);
-            setDiscount(inputDiscount);
-            setVIP(inputVIP);
-            setCashierPerson(inputCashierPerson);
-        } catch(Exception e) {
-            throw (new Exception("Invalid input data"));
-        }
-    }
-    public Ticket(int hour, double inputPrice, double inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
-        generatedId = idCounter;
-        idCounter++;
-
-        try {
-            setTicketPurchaseTimeByHour(hour);
-            setTicketPurchaseDate(); //date today
-            setPrice(inputPrice);
-            setDiscount(inputDiscount);
-            setVIP(inputVIP);
-            setCashierPerson(inputCashierPerson);
-        } catch(Exception e) {
-            throw (new Exception("Invalid input data"));
-        }
-    }
-    public Ticket(int year, int month, int day, double inputPrice, double inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
-        generatedId = idCounter;
-        idCounter++;
-
-        try {
-            setTicketPurchaseTime(); //time now
-            setTicketPurchaseDateByYearMonthDay(year, month, day);
             setPrice(inputPrice);
             setDiscount(inputDiscount);
             setVIP(inputVIP);
@@ -188,13 +128,13 @@ public class Ticket {
             throw (new Exception("Invalid input data"));
         }
     }
-    public Ticket(Time ticketPurchaseTime, Date ticketPurchaseDate, double inputPrice, double inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
+    public Ticket(int hour, int year, int month, int day, double inputPrice, double inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
         try {
-            setTicketPurchaseTimeByTimeObject(ticketPurchaseTime);
-            setTicketPurchaseDateByDateObject(ticketPurchaseDate);
+            setTicketPurchaseTimeByHour(hour);
+            setTicketPurchaseDateByYearMonthDay(year, month, day);
             setPrice(inputPrice);
             setDiscount(inputDiscount);
             setVIP(inputVIP);
