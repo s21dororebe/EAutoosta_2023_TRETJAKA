@@ -3,6 +3,7 @@ package model;
 import model.extraClasses.Date;
 import model.extraClasses.Time;
 
+import java.time.LocalTime;
 import java.util.PriorityQueue;
 
 public class BusTrip {
@@ -57,12 +58,40 @@ public class BusTrip {
     public void setDateTo(Date dateTo) {
         this.dateTo = dateTo;
     }
-    public void setTimeFrom(Time timeFrom) {
-        this.timeFrom = timeFrom;
+    //---------------------------------------------------------------------------------------------
+
+    //TIME
+
+    public void setTimeFrom() throws Exception {
+        timeTo = new Time(LocalTime.now().getHour(), LocalTime.now().getMinute());
     }
-    public void setTimeTo(Time timeTo) {
-        this.timeTo = timeTo;
+    public void setTimeFromByTimeObject(Time inputTimeFrom) throws Exception {
+        timeTo = new Time(inputTimeFrom.getHour(), inputTimeFrom.getMinute());
     }
+    public void setTimeFromByHour(int hour) throws Exception {
+        timeTo = new Time(hour);
+    }
+    public void setTimeFromByHourAndMinute(int hour, int minute) throws Exception {
+        timeTo = new Time(hour, minute);
+    }
+
+    public void setTimeTo() throws Exception {
+        timeFrom = new Time(LocalTime.now().getHour(), LocalTime.now().getMinute());
+    }
+    public void setTimeToByTimeObject(Time inputTimeTo) throws Exception {
+        timeFrom = new Time(inputTimeTo.getHour(), inputTimeTo.getMinute());
+    }
+    public void setTimeToByHour(int hour) throws Exception {
+        timeFrom = new Time(hour);
+    }
+    public void setTimeToByHourAndMinute(int hour, int minute) throws Exception {
+        timeFrom = new Time(hour, minute);
+    }
+
+
+    //---------------------------------------------------------------------------------------------
+
+
     public void setNumberOfSeats(int numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
     }
