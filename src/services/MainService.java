@@ -68,12 +68,23 @@ public class MainService {
             System.out.println("------------------------------------------------");
 
             System.out.println("Tickets");
-            Ticket t5 = new Ticket(2023, 6, 25, 25, 20, VIPticket.isVIP, cashier3);
+            Ticket t1 = new Ticket();
+            Ticket t2 = new Ticket(12, 2023, 20, 12, 25, 0, VIPticket.notVIP, cashier1);
             Ticket t6 = new Ticket(12, 33, 2023, 7, 20, 60, 50, VIPticket.isVIP, cashier1);
             Ticket t7 = new Ticket(time1, date1, 20, 0, VIPticket.isVIP, cashier3);
-            System.out.println(t5);
             System.out.println(t6);
             System.out.println(t7);
+            System.out.println(t1);
+            System.out.println(t2);
+            System.out.println("------------------------------------------------");
+
+            System.out.println("BusTrip");
+//            Time timefrom1 =
+//            BusTrip bt1 = new BusTrip();
+//            BusTrip bt2 = new BusTrip();
+//            BusTrip bt3 = new BusTrip();
+//            BusTrip bt4 = new BusTrip();
+//            BusTrip bt5 = new BusTrip();
 
         } catch (Exception e){
             System.out.println(e);

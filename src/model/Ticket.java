@@ -88,6 +88,8 @@ public class Ticket {
         ticketPurchaseTime = new Time(hour, minute);
     }
 
+    //TODO test constructors and the conditions
+
     public Ticket() throws Exception {
         generatedId = idCounter;
         idCounter++;

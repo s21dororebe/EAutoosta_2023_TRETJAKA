@@ -180,6 +180,8 @@ public class BusTrip {
         this.driver = driver;
     }
 
+    //TODO test constructors and the conditions
+
     public BusTrip() throws Exception {
         generatedId = idCounter;
         idCounter++;
