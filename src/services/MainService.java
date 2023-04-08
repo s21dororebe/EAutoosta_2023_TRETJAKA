@@ -79,12 +79,20 @@ public class MainService {
             System.out.println("------------------------------------------------");
 
             System.out.println("BusTrip");
-//            Time timefrom1 =
-//            BusTrip bt1 = new BusTrip();
+            Time timefrom1 = new Time(12, 20);
+            Time timeto1 = new Time(16);
+            Time timefrom2 = new Time(13);
+            Time timeto2 = new Time(18, 30);
+
+            Date datefrom1 = new Date(2023, 6, 12);
+            Date dateto1 = new Date(2022, 5, 5);
+            Date datefrom2 = new Date(2023, 7, 7);
+            Date dateto2 = new Date(2018, 9, 23);
+
+//            BusTrip bt1 = new BusTrip(timefrom1, timeto1, 2023, 6, 25, 2023, 6, 26, );
 //            BusTrip bt2 = new BusTrip();
 //            BusTrip bt3 = new BusTrip();
 //            BusTrip bt4 = new BusTrip();
-//            BusTrip bt5 = new BusTrip();
 
         } catch (Exception e){
             System.out.println(e);
