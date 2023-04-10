@@ -50,7 +50,7 @@ public class BusTrip {
             if(inputStationFrom != inputStationTo){
                 stationFrom = inputStationFrom;
                 stationTo = inputStationTo;
-            }
+            } else throw (new Exception("Input stations are the same"));
         } else {
             throw (new Exception("Invalid input Station data"));
         }
