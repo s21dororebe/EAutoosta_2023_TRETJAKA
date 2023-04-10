@@ -79,7 +79,7 @@ public class Station {
     @Override
     public String toString() {
         if(city == null){
-            return "" + generatedId + " " + title + ": Unknown, working time: " + workingTime;
-        } else return "" + generatedId + " " + title + ": " + city + ", working time: " + workingTime;
+            return "Station " + generatedId + ": " + title + ", Unknown, working time: " + workingTime;
+        } else return "Station " + generatedId + ": " + title + ", " + city + ", working time: " + workingTime;
     }
 }
