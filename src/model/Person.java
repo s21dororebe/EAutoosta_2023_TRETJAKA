@@ -52,14 +52,9 @@ public class Person {
         setPersonCode("000000-00000");
     }
     public Person(String name, String surname, String personCode ) throws Exception {
-        try {
-            setName(name);
-            setSurname(surname);
-            setPersonCode(personCode);
-        } catch (Exception e){
-            throw (new Exception("Wrong input data (name/surname/person code)"));
-        }
-
+        setName(name);
+        setSurname(surname);
+        setPersonCode(personCode);
     }
 
     public String toString() {

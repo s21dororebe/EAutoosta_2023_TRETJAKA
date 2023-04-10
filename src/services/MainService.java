@@ -13,11 +13,13 @@ public class MainService {
         try {
             Person p1 = new Person("Rebeka", "Tretjaka", "300802-21636");
             Person p2 = new Person();
+            Person p3 = new Person("Konstantins", "Tretjaks", "204099-12395");
             Employee e1 = new Employee(p1, 2023, 3, 24);
             Employee e2 = new Employee(p2, 2023, 6, 20);
             Employee e3 = new Employee("Svetlana", "Ko", "124556-26354", 2023, 6, 20);
             BusDriver bd1 = new BusDriver(p1, 2023, 3, 24, 0);
             BusDriver bd2 = new BusDriver(e2, 5);
+            BusDriver bd3 = new BusDriver(p3, 2023, 9, 28, 10);
             Cashier cashier1 = new Cashier(p1, 2023, 12, 1);
             Cashier cashier2 = new Cashier(e1);
             Cashier cashier3 = new Cashier(e3);
@@ -33,11 +35,15 @@ public class MainService {
             System.out.println(e2);
             System.out.println("Bus Drivers: ");
             System.out.println(bd1);
+            bd1.addCategory(BusCategory.minibus);
             bd2.addCategory(BusCategory.minibus);
             bd2.addCategory(BusCategory.schoolbus);
             System.out.println(bd2);
             bd2.removeCategory(BusCategory.schoolbus);
             System.out.println(bd2);
+            bd3.addCategory(BusCategory.largebus);
+            bd3.addCategory(BusCategory.minibus);
+            bd3.addCategory(BusCategory.schoolbus);
 
             WorkingTime wt1 = new WorkingTime(0, 0, 23, 59);
             System.out.println("WorkingTime: " + wt1);
@@ -85,15 +91,19 @@ public class MainService {
             Time timeto2 = new Time(18, 30);
 
             Date datefrom1 = new Date(2023, 6, 12);
-            Date dateto1 = new Date(2022, 5, 5);
+            Date dateto1 = new Date(2022, 5, 15);
             Date datefrom2 = new Date(2023, 7, 7);
             Date dateto2 = new Date(2018, 9, 23);
 
-//            BusTrip bt1 = new BusTrip(timefrom1, timeto1, 2023, 6, 25, 2023, 6, 26, );
-//            BusTrip bt2 = new BusTrip();
-//            BusTrip bt3 = new BusTrip();
-//            BusTrip bt4 = new BusTrip();
+            BusTrip bt1 = new BusTrip(timefrom1, timeto1, 2023, 6, 25, 2023, 6, 26, st2, st3, 20, bd1);
+            BusTrip bt2 = new BusTrip(12, 20, 12, 40, datefrom1, dateto1, st2, st3, 50, bd3);
+            BusTrip bt3 = new BusTrip(11, 0, 12, 50, 2023, 7, 25, 2023, 7, 26, st3, st2, 60, bd1);
+            BusTrip bt4 = new BusTrip(timefrom2, timeto2, datefrom2, dateto2,  st2, st3, 10, bd2);
 
+            System.out.println(bt1);
+            System.out.println(bt2);
+            System.out.println(bt3);
+            System.out.println(bt4);
         } catch (Exception e){
             System.out.println(e);
         }
