@@ -11,36 +11,32 @@ public class Time {
         return minute;
     }
 
-    public void setHour(int inputHour) {
+    public void setHour(int inputHour) throws Exception {
         if(inputHour >= 0 && inputHour <= 23){
             hour = inputHour;
+        } else {
+            throw (new Exception("Invalid input hour"));
         }
     }
-    public void setMinute(int inputMinute) {
+    public void setMinute(int inputMinute) throws Exception {
         if(inputMinute >= 0 && inputMinute <= 59){
             minute = inputMinute;
+        } else {
+            throw (new Exception("Invalid input minute"));
         }
     }
 
-    public Time() {
+    public Time() throws Exception {
         setHour(0);
         setMinute(0);
     }
     public Time(int hour) throws Exception {
-        try {
-            setHour(hour);
-        } catch (Exception e){
-            throw (new Exception("Wrong input hour"));
-        }
+        setHour(hour);
         setMinute(0);
     }
     public Time(int hour, int minute) throws Exception {
-        try {
-            setHour(hour);
-            setMinute(minute);
-        } catch (Exception e){
-            throw (new Exception("Wrong input hour and minute"));
-        }
+        setHour(hour);
+        setMinute(minute);
     }
 
     @Override
