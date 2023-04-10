@@ -19,52 +19,52 @@ public class WorkingTime {
         return endMinute;
     }
 
-    public void setStartHour(int inputStartHour) {
+    public void setStartHour(int inputStartHour) throws Exception {
         if(inputStartHour >= 0 && inputStartHour <= 23){
             startHour = inputStartHour;
+        } else {
+            throw (new Exception("Wrong input start hour"));
         }
     }
-    public void setEndHour(int inputEndHour) {
+    public void setEndHour(int inputEndHour) throws Exception {
         if(inputEndHour >= 0 && inputEndHour <= 23){
             endHour = inputEndHour;
+        } else {
+            throw (new Exception("Wrong input end hour"));
         }
     }
-    public void setStartMinute(int inputStartMinute) {
+    public void setStartMinute(int inputStartMinute) throws Exception {
         if(inputStartMinute >= 0 && inputStartMinute <= 59){
             startMinute = inputStartMinute;
+        } else {
+            throw (new Exception("Wrong input start minute"));
         }
     }
-    public void setEndMinute(int inputEndMinute) {
+    public void setEndMinute(int inputEndMinute) throws Exception {
         if(inputEndMinute >= 0 && inputEndMinute <= 59){
             endMinute = inputEndMinute;
+        } else {
+            throw (new Exception("Wrong input end minute"));
         }
     }
 
-    public WorkingTime() {
+    public WorkingTime() throws Exception {
         setStartHour(0);
         setEndHour(0);
         setStartMinute(0);
         setEndMinute(0);
     }
     public WorkingTime(int startHour, int endHour) throws Exception {
-        try {
-            setStartHour(startHour);
-            setEndHour(endHour);
-        } catch (Exception e){
-            throw (new Exception("Wrong input start and/or end hour/-s"));
-        }
+        setStartHour(startHour);
+        setEndHour(endHour);
         setStartMinute(0);
         setEndMinute(0);
     }
     public WorkingTime(int startHour, int startMinute, int endHour, int endMinute) throws Exception {
-        try {
-            setStartHour(startHour);
-            setStartMinute(startMinute);
-            setEndHour(endHour);
-            setEndMinute(endMinute);
-        } catch (Exception e){
-            throw (new Exception("Wrong input data (hour/-s or/and minutes)"));
-        }
+        setStartHour(startHour);
+        setStartMinute(startMinute);
+        setEndHour(endHour);
+        setEndMinute(endMinute);
     }
 
     @Override
