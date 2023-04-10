@@ -12,7 +12,7 @@ public class Ticket {
     private static long idCounter = 0;
     private Date ticketPurchaseDate;
     private Time ticketPurchaseTime;
-    private double discount = 0;
+    private int discount = 0;
     private double price = 0;
     private Cashier cashierPerson;
     private boolean isVIP = false;
@@ -20,7 +20,7 @@ public class Ticket {
     public Date getTicketPurchaseDate() {
         return ticketPurchaseDate;
     }
-    public double getDiscount() {
+    public int getDiscount() {
         return discount;
     }
     public double getPrice() {
@@ -46,28 +46,29 @@ public class Ticket {
         ticketPurchaseDate = new Date(year, month, day);
     }
 
-    public void setDiscount(double inputDiscount) {
-        if(inputDiscount >= 0){
+    public void setDiscount(int inputDiscount) throws Exception {
+        if(inputDiscount >= 0 && inputDiscount <= 100){
             discount = inputDiscount;
-        }
+        } else throw (new Exception("Invalid discount input"));
     }
-    public void setPrice(double inputPrice) {
-        if(inputPrice >= 0){
+    public void setPrice(double inputPrice) throws Exception {
+        if(inputPrice > 0 && inputPrice <= 1000){
             if(discount > 0) {
                 price = inputPrice - (inputPrice / 100 * discount);
             } else price = inputPrice;
-        }
+        } else throw (new Exception("Invalid price input"));
     }
-    public void setCashierPerson(Cashier inputCashierPerson) {
+    public void setCashierPerson(Cashier inputCashierPerson) throws Exception {
         if(inputCashierPerson != null){
             cashierPerson = inputCashierPerson;
-        }
+        } else throw (new Exception("Invalid input Cashier object"));
     }
-    public void setVIP(VIPticket inputVIP) {
+    public void setVIP(VIPticket inputVIP) throws Exception {
         if(inputVIP == VIPticket.isVIP)
             isVIP = true;
         else if(inputVIP == VIPticket.notVIP)
             isVIP = false;
+        else throw (new Exception("Invalid input data about VIP information"));
     }
 
     public Time getTicketPurchaseTime() {
@@ -88,8 +89,6 @@ public class Ticket {
         ticketPurchaseTime = new Time(hour, minute);
     }
 
-    //TODO test constructors and the conditions
-
     public Ticket() throws Exception {
         generatedId = idCounter;
         idCounter++;
@@ -101,7 +100,7 @@ public class Ticket {
         setVIP(VIPticket.notVIP);
         setCashierPerson(new Cashier());
     }
-    public Ticket(Time ticketPurchaseTime, Date ticketPurchaseDate, double inputPrice, double inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
+    public Ticket(Time ticketPurchaseTime, Date ticketPurchaseDate, double inputPrice, int inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
         generatedId = idCounter;
         idCounter++;
         try {
@@ -115,43 +114,32 @@ public class Ticket {
             throw (new Exception("Invalid input data"));
         }
     }
-    public Ticket(int hour, int minute, int year, int month, int day, double inputPrice, double inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
+    public Ticket(int hour, int minute, int year, int month, int day, double inputPrice, int inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
-        try {
-            setTicketPurchaseTimeByHourAndMinute(hour, minute);
-            setTicketPurchaseDateByYearMonthDay(year, month, day);
-            setPrice(inputPrice);
-            setDiscount(inputDiscount);
-            setVIP(inputVIP);
-            setCashierPerson(inputCashierPerson);
-        } catch(Exception e) {
-            throw (new Exception("Invalid input data"));
-        }
+        setTicketPurchaseTimeByHourAndMinute(hour, minute);
+        setTicketPurchaseDateByYearMonthDay(year, month, day);
+        setPrice(inputPrice);
+        setDiscount(inputDiscount);
+        setVIP(inputVIP);
+        setCashierPerson(inputCashierPerson);
     }
-    public Ticket(int hour, int year, int month, int day, double inputPrice, double inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
+    public Ticket(int hour, int year, int month, int day, double inputPrice, int inputDiscount, VIPticket inputVIP, Cashier inputCashierPerson) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
-        try {
-            setTicketPurchaseTimeByHour(hour);
-            setTicketPurchaseDateByYearMonthDay(year, month, day);
-            setPrice(inputPrice);
-            setDiscount(inputDiscount);
-            setVIP(inputVIP);
-            setCashierPerson(inputCashierPerson);
-        } catch(Exception e) {
-            throw (new Exception("Invalid input data"));
-        }
+        setTicketPurchaseTimeByHour(hour);
+        setTicketPurchaseDateByYearMonthDay(year, month, day);
+        setPrice(inputPrice);
+        setDiscount(inputDiscount);
+        setVIP(inputVIP);
+        setCashierPerson(inputCashierPerson);
     }
 
-    //TODO euro symbol
-    //TODO price view is: 10.5; needs to be: 10,50 euro
-    //TODO discount view 0.0 => 0%
     @Override
     public String toString() {
         return "Ticket " + generatedId + ": " + ticketPurchaseTime + " "
-                + ticketPurchaseDate + ", " + price + "€, discount: " + discount + ", is the ticket a VIP: " + isVIP + ", cashier: " + cashierPerson;
+                + ticketPurchaseDate + ", " + String.format("%.2f", price) + "EURO, discount: " + discount + "%, is the ticket a VIP: " + isVIP + ", cashier: " + cashierPerson.getName();
     }
 }
