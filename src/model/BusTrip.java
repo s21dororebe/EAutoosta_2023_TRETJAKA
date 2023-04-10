@@ -6,7 +6,9 @@ import model.extraClasses.Time;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.PriorityQueue;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Iterator;
 
 public class BusTrip {
     private final long generatedId;
@@ -19,6 +21,7 @@ public class BusTrip {
     private Time timeTo;
     private int numberOfSeats = 0;
     private BusDriver driver;
+    private Deque<Ticket> allTickets = new ArrayDeque<>();
 
     public Station getStationFrom() {
         return stationFrom;
@@ -43,6 +46,9 @@ public class BusTrip {
     }
     public int getNumberOfSeats() {
         return numberOfSeats;
+    }
+    public Deque getAllTickets() {
+        return allTickets;
     }
 
     public void setStations(Station inputStationFrom, Station inputStationTo) throws Exception {
@@ -137,7 +143,6 @@ public class BusTrip {
             throw (new Exception("Invalid input Time objects"));
         }
     }
-
     public void setTimesByHourAndMinute(int hourFrom, int minuteFrom, int hourTo, int minuteTo) throws Exception {
         setTimesByTimeObject(new Time(hourFrom, minuteFrom), new Time(hourTo, minuteTo));
     }
@@ -157,7 +162,7 @@ public class BusTrip {
                         break;
                     }
                 }
-            } else if (numberOfSeats >= 30){
+            } else {
                 for(BusCategory temp : inputDriver.getDriveCategories()){
                     if(temp.equals(BusCategory.largebus)){
                         driver = inputDriver;
@@ -224,11 +229,31 @@ public class BusTrip {
                 ", driver: " + driver;
     }
 
-    public void addTicket(){
-
+    public void addTicket(Ticket ticketData) throws Exception {
+        //1. if there is space
+        //1.2. check if this ticket already exist
+        //1.2.1. if yes throw exception
+        //1.2.2. if no check VIP
+        //1.2.2.1. if VIP add ticket in the front
+        //1.2.2.1. if not VIP add ticket in the end
+        //2. if there is no space throw exception
+        
+        if(numberOfSeats <= allTickets.size()){
+            for(Ticket temp : allTickets){
+                if(temp.equals(ticketData)){
+                    throw (new Exception("This ticket already exists"));
+                }
+            }
+            if(ticketData.isVIP())
+                allTickets.addFirst(ticketData);
+            else if(!ticketData.isVIP())
+                allTickets.addLast(ticketData);
+            else throw (new Exception("Invalid isVip"));
+        } else throw (new Exception("The ticket list is full - the bus is full"));
     }
-    //tickets <= numberOfSeats
-    //VIP tickets are going 1st
-    public void changeBusDriver(){}
+
+    public void changeBusDriver(BusDriver inputDriver) throws Exception {
+        setDriver(inputDriver);
+    }
 
 }
