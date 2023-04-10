@@ -11,18 +11,14 @@ import java.util.PriorityQueue;
 public class BusTrip {
     private final long generatedId;
     private static long idCounter = 0;
-    private Station stationFrom; //done ---> need to test
-    private Station stationTo; //done ---> need to test
-    //TODO test set functions for date and time
-    private Date dateFrom; //done ---> need to test
-    private Date dateTo; //done ---> need to test
-    private Time timeFrom; //done ---> need to test
-    private Time timeTo; //done ---> need to test
+    private Station stationFrom;
+    private Station stationTo;
+    private Date dateFrom;
+    private Date dateTo;
+    private Time timeFrom;
+    private Time timeTo;
     private int numberOfSeats = 0;
     private BusDriver driver;
-    //if numberOfSeats < 30 => minibus || largebus
-    //if numberOfSeats >= 30 => largebus
-
 
     public Station getStationFrom() {
         return stationFrom;
@@ -49,17 +45,18 @@ public class BusTrip {
         return numberOfSeats;
     }
 
-    public void setStations(Station inputStationFrom, Station inputStationTo) {
+    public void setStations(Station inputStationFrom, Station inputStationTo) throws Exception {
         if(inputStationFrom != null && inputStationTo != null){
             if(inputStationFrom != inputStationTo){
                 stationFrom = inputStationFrom;
                 stationTo = inputStationTo;
             }
+        } else {
+            throw (new Exception("Invalid input Station data"));
         }
     }
-
-    public void setDateFromByDateObject(Date inputDateFrom) {
-        if(inputDateFrom != null){
+    public void setDatesByDateObject(Date inputDateFrom, Date inputDateTo) throws Exception {
+        if(inputDateFrom != null && inputDateTo != null){
             if(inputDateFrom.getYear() >= LocalDate.now().getYear() && inputDateFrom.getMonth() >= LocalDate.now().getMonthValue()){
                 if(inputDateFrom.getMonth() == LocalDate.now().getMonthValue()){
                     if(inputDateFrom.getDay() >= LocalDate.now().getDayOfMonth()){
@@ -68,23 +65,9 @@ public class BusTrip {
                 } else {
                     dateFrom = inputDateFrom;
                 }
-            }
-        }
-    }
-    public void setDateFromByYearMonthDay(int year, int month, int day) throws Exception {
-        if(year >= LocalDate.now().getYear() && month >= LocalDate.now().getMonthValue()){
-            if(month == LocalDate.now().getMonthValue()){
-                if(day >= LocalDate.now().getDayOfMonth()){
-                    dateFrom = new Date(year, month, day);
-                }
             } else {
-                dateFrom = new Date(year, month, day);
+                throw (new Exception("Invalid input date from"));
             }
-        }
-    }
-
-    public void setDateToByDateObject(Date inputDateTo) {
-        if(inputDateTo != null){
             if(inputDateTo.getYear() >= LocalDate.now().getYear() && inputDateTo.getMonth() >= LocalDate.now().getMonthValue()){
                 if(inputDateTo.getMonth() == LocalDate.now().getMonthValue()){
                     if(inputDateTo.getDay() >= LocalDate.now().getDayOfMonth()){
@@ -93,40 +76,90 @@ public class BusTrip {
                 } else {
                     dateTo = inputDateTo;
                 }
+            } else {
+                throw (new Exception("Invalid input date from"));
             }
         }
     }
-    public void setDateToByYearMonthDay(int year, int month, int day) throws Exception {
-        if(year >= LocalDate.now().getYear() && month >= LocalDate.now().getMonthValue()){
-            if(month == LocalDate.now().getMonthValue()){
-                if(day >= LocalDate.now().getDayOfMonth()){
-                    dateTo = new Date(year, month, day);
+    public void setDatesByYearMonthDay(int yearFrom, int monthFrom, int dayFrom, int yearTo, int monthTo, int dayTo) throws Exception {
+        if(yearFrom >= LocalDate.now().getYear() && monthFrom >= LocalDate.now().getMonthValue()){
+            if(monthFrom == LocalDate.now().getMonthValue()){
+                if(dayFrom >= LocalDate.now().getDayOfMonth()){
+                    dateFrom = new Date(yearFrom, monthFrom, dayFrom);
                 }
             } else {
-                dateTo = new Date(year, month, day);
+                dateFrom = new Date(yearFrom, monthFrom, dayFrom);
             }
+        } else {
+            throw (new Exception("Invalid input date from"));
+        }
+        if(yearTo >= LocalDate.now().getYear() && monthTo >= LocalDate.now().getMonthValue()){
+            if(monthTo == LocalDate.now().getMonthValue()){
+                if(dayTo >= LocalDate.now().getDayOfMonth()){
+                    dateFrom = new Date(yearTo, monthTo, dayTo);
+                }
+            } else {
+                dateFrom = new Date(yearTo, monthTo, dayTo);
+            }
+        } else {
+            throw (new Exception("Invalid input date from"));
         }
     }
 
-    public void setTimeFromByTimeObject(Time inputTimeFrom) throws Exception {
-        if(inputTimeFrom != null){
-            if(dateFrom.getYear() == LocalDate.now().getYear()
-            && dateFrom.getMonth() == LocalDate.now().getMonthValue()
-            && dateFrom.getDay() == LocalDate.now().getDayOfMonth()){
-                if(inputTimeFrom.getHour() >= LocalTime.now().getHour()){
-                    if(inputTimeFrom.getHour() == LocalTime.now().getHour()){
-                        if(inputTimeFrom.getMinute() >= LocalTime.now().getMinute()){
+
+    public void setTimesByTimeObject(Time inputTimeFrom, Time inputTimeTo) throws Exception {
+        if(inputTimeFrom != null && inputTimeTo != null){
+            //1. if datefrom is today and further
+            //1.1. if datefrom is today
+            //1.1.2. check if the input time is now and further
+            //1.1.2.1. set the time from
+            //1.2. else set the time
+            //2. else throw exception
+
+            //3. if dateto is >= datefrom
+            //3.1. if dateto == datefrom
+            //3.1.1. if input timeto > timefrom
+            //3.1.1.1. set the time to
+            //3.1.2. else throw exception
+            //3.2. else set the timeto
+            //4. else throw exception
+
+            if(dateFrom.getYear() >= LocalDate.now().getYear()
+                    && dateFrom.getMonth() >= LocalDate.now().getMonthValue()
+                    && dateFrom.getDay() >= LocalDate.now().getDayOfMonth()){
+                if(dateFrom.getYear() == LocalDate.now().getYear()
+                        && dateFrom.getMonth() == LocalDate.now().getMonthValue()
+                        && dateFrom.getDay() == LocalDate.now().getDayOfMonth()){
+                    if(inputTimeFrom.getHour() >= LocalTime.now().getHour()){
+                        if(inputTimeFrom.getHour() == LocalTime.now().getHour()){
+                            if(inputTimeFrom.getMinute() > LocalTime.now().getMinute()){
+                                timeFrom = new Time(inputTimeFrom.getHour(), inputTimeFrom.getMinute());
+                            }
+                        } else {
                             timeFrom = new Time(inputTimeFrom.getHour(), inputTimeFrom.getMinute());
                         }
-                    } else {
-                        timeFrom = new Time(inputTimeFrom.getHour(), inputTimeFrom.getMinute());
-                    }
+                    } else throw (new Exception("Invalid input time from"));
+                } else {
+                    timeFrom = new Time(inputTimeFrom.getHour(), inputTimeFrom.getMinute());
                 }
-            } else {
-                timeFrom = new Time(inputTimeFrom.getHour(), inputTimeFrom.getMinute());
-            }
+            } else throw (new Exception("Invalid input time from"));
+
+            if(dateTo.getYear() >= dateFrom.getYear()
+                    && dateTo.getMonth() >= dateFrom.getMonth()
+                    && dateTo.getDay() >= dateFrom.getDay()){
+                if(dateTo.getYear() == dateFrom.getYear()
+                        && dateTo.getMonth() == dateFrom.getMonth()
+                        && dateTo.getDay() == dateFrom.getDay()){
+                    if(inputTimeTo.getHour() > inputTimeFrom.getHour()){
+                        timeTo = new Time(inputTimeTo.getHour(), inputTimeTo.getMinute());
+                    } else throw (new Exception("Invalid input time to"));
+                } else timeTo = new Time(inputTimeTo.getHour(), inputTimeTo.getMinute());
+            } else throw (new Exception("Invalid input time to"));
+        } else {
+            throw (new Exception("Invalid input Time objects"));
         }
     }
+
     public void setTimeFromByHourAndMinute(int hour, int minute) throws Exception {
         if(hour >= LocalTime.now().getHour()){
             if(dateFrom.getYear() == LocalDate.now().getYear()
@@ -144,21 +177,8 @@ public class BusTrip {
             }
         }
     }
-
-    public void setTimeToByTimeObject(Time inputTimeTo) throws Exception {
-        if(inputTimeTo != null){
-            if(inputTimeTo.getHour() >= LocalTime.now().getHour()){
-                if(inputTimeTo.getHour() == LocalTime.now().getHour()){
-                    if(inputTimeTo.getMinute() >= LocalTime.now().getMinute()){
-                        timeTo = new Time(inputTimeTo.getHour(), inputTimeTo.getMinute());
-                    }
-                } else {
-                    timeTo = new Time(inputTimeTo.getHour(), inputTimeTo.getMinute());
-                }
-            }
-        }
-    }
     public void setTimeToByHourAndMinute(int hour, int minute) throws Exception {
+        //TODO if today is the day
         if(hour >= LocalTime.now().getHour()){
             if(hour == LocalTime.now().getHour()){
                 if(minute >= LocalTime.now().getMinute()){
@@ -170,95 +190,90 @@ public class BusTrip {
         }
     }
 
-
-    public void setNumberOfSeats(int inputNumberOfSeats) {
+    public void setNumberOfSeats(int inputNumberOfSeats) throws Exception {
         if(inputNumberOfSeats > 0 && inputNumberOfSeats <= 60)
             numberOfSeats = inputNumberOfSeats;
+        else
+            throw (new Exception("Invalid input number of seats"));
     }
-    public void setDriver(BusDriver inputDriver) {
+    public void setDriver(BusDriver inputDriver) throws Exception {
         if(inputDriver != null){
             if(numberOfSeats < 30){
-                for(BusCategory temp : driver.getDriveCategories()){
+                for(BusCategory temp : inputDriver.getDriveCategories()){
                     if(temp.equals(BusCategory.minibus) || temp.equals(BusCategory.largebus)){
                         driver = inputDriver;
+                        break;
                     }
                 }
             } else if (numberOfSeats >= 30){
-                for(BusCategory temp : driver.getDriveCategories()){
+                for(BusCategory temp : inputDriver.getDriveCategories()){
                     if(temp.equals(BusCategory.largebus)){
                         driver = inputDriver;
+                        break;
                     }
                 }
             }
+        } else {
+            throw (new Exception("Invalid input driver data"));
         }
     }
-
-    //TODO test constructors and the conditions
-    //TODO test Station input
 
     public BusTrip(Time timeFrom, Time timeTo, int yearFrom, int monthFrom, int dayFrom, int yearTo, int monthTo, int dayTo, Station inputStationFrom, Station inputStationTo, int inputNumberOfSeats, BusDriver inputDriver) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
-        try {
-            setTimeFromByTimeObject(timeFrom);
-            setTimeToByTimeObject(timeTo);
-            setDateFromByYearMonthDay(yearFrom, monthFrom, dayFrom);
-            setDateToByYearMonthDay(yearTo, monthTo, dayTo);
-            setStations(inputStationFrom, inputStationTo);
-            setNumberOfSeats(inputNumberOfSeats);
-            setDriver(inputDriver);
-        } catch(Exception e) {
-            throw (new Exception("Invalid input data"));
-        }
+        setDatesByYearMonthDay(yearFrom, monthFrom, dayFrom, yearTo, monthTo, dayTo);
+        setTimeFromByTimeObject(timeFrom);
+        setTimeToByTimeObject(timeTo);
+        setStations(inputStationFrom, inputStationTo);
+        setNumberOfSeats(inputNumberOfSeats);
+        setDriver(inputDriver);
     }
     public BusTrip(int hourFrom, int minuteFrom, int hourTo, int minuteTo, Date dateFrom, Date dateTo, Station inputStationFrom, Station inputStationTo, int inputNumberOfSeats, BusDriver inputDriver) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
-        try {
-            setTimeFromByHourAndMinute(hourFrom, minuteFrom);
-            setTimeToByHourAndMinute(hourTo, minuteTo);
-            setDateFromByDateObject(dateFrom);
-            setDateToByDateObject(dateTo);
-            setStations(inputStationFrom, inputStationTo);
-            setNumberOfSeats(inputNumberOfSeats);
-            setDriver(inputDriver);
-        } catch(Exception e) {
-            throw (new Exception("Invalid input data"));
-        }
+        setDatesByDateObject(dateFrom, dateTo);
+        setTimeFromByHourAndMinute(hourFrom, minuteFrom);
+        setTimeToByHourAndMinute(hourTo, minuteTo);
+        setStations(inputStationFrom, inputStationTo);
+        setNumberOfSeats(inputNumberOfSeats);
+        setDriver(inputDriver);
     }
     public BusTrip(int hourFrom, int minuteFrom, int hourTo, int minuteTo, int yearFrom, int monthFrom, int dayFrom, int yearTo, int monthTo, int dayTo, Station inputStationFrom, Station inputStationTo, int inputNumberOfSeats, BusDriver inputDriver) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
-        try {
-            setTimeFromByHourAndMinute(hourFrom, minuteFrom);
-            setTimeToByHourAndMinute(hourTo, minuteTo);
-            setDateFromByYearMonthDay(yearFrom, monthFrom, dayFrom);
-            setDateToByYearMonthDay(yearTo, monthTo, dayTo);
-            setStations(inputStationFrom, inputStationTo);
-            setNumberOfSeats(inputNumberOfSeats);
-            setDriver(inputDriver);
-        } catch(Exception e) {
-            throw (new Exception("Invalid input data"));
-        }
+        setDatesByYearMonthDay(yearFrom, monthFrom, dayFrom, yearTo, monthTo, dayTo);
+        setTimeFromByHourAndMinute(hourFrom, minuteFrom);
+        setTimeToByHourAndMinute(hourTo, minuteTo);
+        setStations(inputStationFrom, inputStationTo);
+        setNumberOfSeats(inputNumberOfSeats);
+        setDriver(inputDriver);
     }
     public BusTrip(Time timeFrom, Time timeTo, Date dateFrom, Date dateTo, Station inputStationFrom, Station inputStationTo, int inputNumberOfSeats, BusDriver inputDriver) throws Exception {
         generatedId = idCounter;
         idCounter++;
 
-        try {
-            setTimeFromByTimeObject(timeFrom);
-            setTimeToByTimeObject(timeTo);
-            setDateFromByDateObject(dateFrom);
-            setDateToByDateObject(dateTo);
-            setStations(inputStationFrom, inputStationTo);
-            setNumberOfSeats(inputNumberOfSeats);
-            setDriver(inputDriver);
-        } catch(Exception e) {
-            throw (new Exception("Invalid input data"));
-        }
+        setDatesByDateObject(dateFrom, dateTo);
+        setTimeFromByTimeObject(timeFrom);
+        setTimeToByTimeObject(timeTo);
+        setStations(inputStationFrom, inputStationTo);
+        setNumberOfSeats(inputNumberOfSeats);
+        setDriver(inputDriver);
+    }
+
+    @Override
+    public String toString() {
+        return "BusTrip " + generatedId +
+                ", stationFrom: " + stationFrom.getCity() +
+                ", stationTo: " + stationTo.getCity() +
+                ", dates: " + dateFrom +
+                " --- " + dateTo +
+                ", time: " + timeFrom +
+                " --- " + timeTo +
+                ", n.OfSeats: " + numberOfSeats +
+                ", driver: " + driver;
     }
 
     public void addTicket(){
