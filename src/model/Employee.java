@@ -13,15 +13,17 @@ public class Employee extends Person{
     }
     public void setContractDate(int year, int month, int day) throws Exception {
         if(contractDate.getYear() <= year){
-            if(contractDate.getMonth() < month){
-                contractDate = new Date(year, month, day);
-            } else if (contractDate.getMonth() == month){
-                if(contractDate.getDay() <= day){
+            if(contractDate.getYear() == year){
+                if(contractDate.getMonth() < month){
                     contractDate = new Date(year, month, day);
+                } else if (contractDate.getMonth() == month){
+                    if(contractDate.getDay() <= day){
+                        contractDate = new Date(year, month, day);
+                    }
+                    else throw (new Exception("Wrong input contract day"));
                 }
-                else throw (new Exception("Wrong input contract day"));
-            }
-            else throw (new Exception("Wrong input contract month"));
+                else throw (new Exception("Wrong input contract month"));
+            } else contractDate = new Date(year, month, day);
         }
         else throw (new Exception("Wrong input contract year"));
     }

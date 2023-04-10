@@ -11,7 +11,7 @@ public class Date {
         return year;
     }
     public void setYear(int inputYear) throws Exception {
-        if(inputYear > 1900 && inputYear <= LocalDate.now().getYear()){
+        if(inputYear > 1900){
             year = inputYear;
         } else {
             throw (new Exception("Invalid input year"));
