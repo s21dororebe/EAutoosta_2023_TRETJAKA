@@ -19,24 +19,25 @@ public class Employee extends Person{
                 if(contractDate.getDay() <= day){
                     contractDate = new Date(year, month, day);
                 }
-                else throw (new Exception("Wrong data"));
+                else throw (new Exception("Wrong input contract day"));
             }
-            else throw (new Exception("Wrong data"));
+            else throw (new Exception("Wrong input contract month"));
         }
-        else throw (new Exception("Wrong data"));
-
+        else throw (new Exception("Wrong input contract year"));
     }
 
     public String getContractNumber() {
         return contractNumber;
     }
-    public void setContractNumber(String name, String surname) {
-        int year = LocalDate.now().getYear();
-        contractNumber += Integer.toString(year);
-        contractNumber += "_";
-        contractNumber += name.charAt(0);
-        contractNumber += "_";
-        contractNumber += surname.charAt(0);
+    public void setContractNumber(String name, String surname) throws Exception {
+        if(name != null && surname != null){
+            int year = LocalDate.now().getYear();
+            contractNumber += Integer.toString(year);
+            contractNumber += "_";
+            contractNumber += name.charAt(0);
+            contractNumber += "_";
+            contractNumber += surname.charAt(0);
+        } else throw (new Exception("Wrong input name or/and surname"));
     }
 
     public Employee() throws Exception {
@@ -46,32 +47,13 @@ public class Employee extends Person{
     }
     public Employee(String name, String surname, String personCode, int yearOfContract, int monthOfContract, int dateOfContract) throws Exception {
         super(name, surname, personCode);
-        try {
-            setContractNumber(name, surname);
-        } catch (Exception e){
-            throw (new Exception ("Wrong name and/or surname"));
-        }
         setContractNumber(name, surname);
-        try {
-            setContractDate(yearOfContract, monthOfContract, dateOfContract);
-        } catch (Exception e){
-            throw (new Exception ("Wrong data (year/month/day)"));
-        }
+        setContractDate(yearOfContract, monthOfContract, dateOfContract);
     }
     public Employee(Person personData, int yearOfContract, int monthOfContract, int dateOfContract) throws Exception {
-        super(personData.getName(),
-                personData.getSurname(),
-                personData.getPersonCode());
-        try {
-            setContractNumber(personData.getName(), personData.getSurname());
-        } catch (Exception e){
-            throw (new Exception ("Wrong name and/or surname"));
-        }
-        try {
-            setContractDate(yearOfContract, monthOfContract, dateOfContract);
-        } catch (Exception e){
-            throw (new Exception ("Wrong data (year/month/day)"));
-        }
+        super(personData.getName(), personData.getSurname(), personData.getPersonCode());
+        setContractNumber(personData.getName(), personData.getSurname());
+        setContractDate(yearOfContract, monthOfContract, dateOfContract);
     }
 
     public String toString() {
