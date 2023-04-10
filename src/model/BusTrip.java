@@ -82,30 +82,8 @@ public class BusTrip {
         }
     }
     public void setDatesByYearMonthDay(int yearFrom, int monthFrom, int dayFrom, int yearTo, int monthTo, int dayTo) throws Exception {
-        if(yearFrom >= LocalDate.now().getYear() && monthFrom >= LocalDate.now().getMonthValue()){
-            if(monthFrom == LocalDate.now().getMonthValue()){
-                if(dayFrom >= LocalDate.now().getDayOfMonth()){
-                    dateFrom = new Date(yearFrom, monthFrom, dayFrom);
-                }
-            } else {
-                dateFrom = new Date(yearFrom, monthFrom, dayFrom);
-            }
-        } else {
-            throw (new Exception("Invalid input date from"));
-        }
-        if(yearTo >= LocalDate.now().getYear() && monthTo >= LocalDate.now().getMonthValue()){
-            if(monthTo == LocalDate.now().getMonthValue()){
-                if(dayTo >= LocalDate.now().getDayOfMonth()){
-                    dateFrom = new Date(yearTo, monthTo, dayTo);
-                }
-            } else {
-                dateFrom = new Date(yearTo, monthTo, dayTo);
-            }
-        } else {
-            throw (new Exception("Invalid input date from"));
-        }
+        setDatesByDateObject(new Date(yearFrom, monthFrom, dayFrom), new Date(yearTo, monthTo, dayTo));
     }
-
 
     public void setTimesByTimeObject(Time inputTimeFrom, Time inputTimeTo) throws Exception {
         if(inputTimeFrom != null && inputTimeTo != null){
@@ -160,34 +138,8 @@ public class BusTrip {
         }
     }
 
-    public void setTimeFromByHourAndMinute(int hour, int minute) throws Exception {
-        if(hour >= LocalTime.now().getHour()){
-            if(dateFrom.getYear() == LocalDate.now().getYear()
-                    && dateFrom.getMonth() == LocalDate.now().getMonthValue()
-                    && dateFrom.getDay() == LocalDate.now().getDayOfMonth()){
-                if(hour == LocalTime.now().getHour()){
-                    if(minute >= LocalTime.now().getMinute()){
-                        timeFrom = new Time(hour, minute);
-                    }
-                } else {
-                    timeFrom = new Time(hour, minute);
-                }
-            } else {
-                timeFrom = new Time(hour, minute);
-            }
-        }
-    }
-    public void setTimeToByHourAndMinute(int hour, int minute) throws Exception {
-        //TODO if today is the day
-        if(hour >= LocalTime.now().getHour()){
-            if(hour == LocalTime.now().getHour()){
-                if(minute >= LocalTime.now().getMinute()){
-                    timeTo = new Time(hour, minute);
-                }
-            } else {
-                timeTo = new Time(hour, minute);
-            }
-        }
+    public void setTimesByHourAndMinute(int hourFrom, int minuteFrom, int hourTo, int minuteTo) throws Exception {
+        setTimesByTimeObject(new Time(hourFrom, minuteFrom), new Time(hourTo, minuteTo));
     }
 
     public void setNumberOfSeats(int inputNumberOfSeats) throws Exception {
@@ -223,8 +175,7 @@ public class BusTrip {
         idCounter++;
 
         setDatesByYearMonthDay(yearFrom, monthFrom, dayFrom, yearTo, monthTo, dayTo);
-        setTimeFromByTimeObject(timeFrom);
-        setTimeToByTimeObject(timeTo);
+        setTimesByTimeObject(timeFrom, timeTo);
         setStations(inputStationFrom, inputStationTo);
         setNumberOfSeats(inputNumberOfSeats);
         setDriver(inputDriver);
@@ -234,8 +185,7 @@ public class BusTrip {
         idCounter++;
 
         setDatesByDateObject(dateFrom, dateTo);
-        setTimeFromByHourAndMinute(hourFrom, minuteFrom);
-        setTimeToByHourAndMinute(hourTo, minuteTo);
+        setTimesByHourAndMinute(hourFrom, minuteFrom, hourTo, minuteTo);
         setStations(inputStationFrom, inputStationTo);
         setNumberOfSeats(inputNumberOfSeats);
         setDriver(inputDriver);
@@ -245,8 +195,7 @@ public class BusTrip {
         idCounter++;
 
         setDatesByYearMonthDay(yearFrom, monthFrom, dayFrom, yearTo, monthTo, dayTo);
-        setTimeFromByHourAndMinute(hourFrom, minuteFrom);
-        setTimeToByHourAndMinute(hourTo, minuteTo);
+        setTimesByHourAndMinute(hourFrom, minuteFrom, hourTo, minuteTo);
         setStations(inputStationFrom, inputStationTo);
         setNumberOfSeats(inputNumberOfSeats);
         setDriver(inputDriver);
@@ -256,8 +205,7 @@ public class BusTrip {
         idCounter++;
 
         setDatesByDateObject(dateFrom, dateTo);
-        setTimeFromByTimeObject(timeFrom);
-        setTimeToByTimeObject(timeTo);
+        setTimesByTimeObject(timeFrom, timeTo);
         setStations(inputStationFrom, inputStationTo);
         setNumberOfSeats(inputNumberOfSeats);
         setDriver(inputDriver);
