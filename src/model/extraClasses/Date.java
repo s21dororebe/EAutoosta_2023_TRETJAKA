@@ -10,49 +10,50 @@ public class Date {
     public int getYear() {
         return year;
     }
-    public void setYear(int inputYear) {
+    public void setYear(int inputYear) throws Exception {
         if(inputYear > 1900 && inputYear <= LocalDate.now().getYear()){
             year = inputYear;
+        } else {
+            throw (new Exception("Invalid input year"));
         }
     }
 
     public int getMonth() {
         return month;
     }
-    public void setMonth(int inputMonth) {
+    public void setMonth(int inputMonth) throws Exception {
         if(inputMonth > 0 && inputMonth <= 12){
             month = inputMonth;
+        } else {
+            throw (new Exception("Invalid input month"));
         }
     }
 
     public int getDay() {
         return day;
     }
-    public void setDay(int inputDay) {
+    public void setDay(int inputDay) throws Exception {
         if(month == 2){
             if(inputDay > 0 && inputDay <= 28){
                 day = inputDay;
             }
         } else if(inputDay > 0 && inputDay <= 31){
             day = inputDay;
+        } else {
+            throw (new Exception("Invalid input day"));
         }
     }
 
-    public Date() {
+    public Date() throws Exception {
         setYear(1900);
         setMonth(1);
         setDay(1);
     }
 
     public Date(int year, int month, int day) throws Exception {
-        try {
-            setYear(year);
-            setMonth(month);
-            setDay(day);
-        } catch (Exception e) {
-            throw (new Exception("Wrong input date data"));
-        }
-        
+        setYear(year);
+        setMonth(month);
+        setDay(day);
     }
 
     @Override
