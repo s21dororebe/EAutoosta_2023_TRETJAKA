@@ -52,7 +52,7 @@ public class Ticket {
         } else throw (new Exception("Invalid discount input"));
     }
     public void setPrice(double inputPrice) throws Exception {
-        if(inputPrice > 0 && inputPrice <= 1000){
+        if(inputPrice >= 0 && inputPrice <= 1000){
             if(discount > 0) {
                 price = inputPrice - (inputPrice / 100 * discount);
             } else price = inputPrice;
@@ -106,8 +106,8 @@ public class Ticket {
         try {
             setTicketPurchaseTimeByTimeObject(ticketPurchaseTime);
             setTicketPurchaseDateByDateObject(ticketPurchaseDate);
-            setPrice(inputPrice);
             setDiscount(inputDiscount);
+            setPrice(inputPrice);
             setVIP(inputVIP);
             setCashierPerson(inputCashierPerson);
         } catch(Exception e) {
@@ -120,8 +120,8 @@ public class Ticket {
 
         setTicketPurchaseTimeByHourAndMinute(hour, minute);
         setTicketPurchaseDateByYearMonthDay(year, month, day);
-        setPrice(inputPrice);
         setDiscount(inputDiscount);
+        setPrice(inputPrice);
         setVIP(inputVIP);
         setCashierPerson(inputCashierPerson);
     }
@@ -131,15 +131,15 @@ public class Ticket {
 
         setTicketPurchaseTimeByHour(hour);
         setTicketPurchaseDateByYearMonthDay(year, month, day);
-        setPrice(inputPrice);
         setDiscount(inputDiscount);
+        setPrice(inputPrice);
         setVIP(inputVIP);
         setCashierPerson(inputCashierPerson);
     }
 
     @Override
     public String toString() {
-        return "Ticket " + generatedId + ": " + ticketPurchaseTime + " "
-                + ticketPurchaseDate + ", " + String.format("%.2f", price) + "EURO, discount: " + discount + "%, is the ticket a VIP: " + isVIP + ", cashier: " + cashierPerson.getName();
+        return "Ticket " + generatedId + ": " + ticketPurchaseDate + " "
+                + ticketPurchaseTime + ", " + String.format("%.2f", price) + " EURO, discount: " + discount + "%, is the ticket a VIP: " + isVIP + ", cashier: " + cashierPerson.getName() + " " + cashierPerson.getSurname();
     }
 }
