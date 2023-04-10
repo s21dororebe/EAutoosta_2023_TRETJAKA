@@ -19,7 +19,7 @@ public class MainServiceTicket {
 
             Ticket t1 = new Ticket();
             Ticket t2 = new Ticket(time, date, 10.8, 0, VIPticket.isVIP, cashier);
-            Ticket t3 = new Ticket(12, 0, 2021, 6, 1, 20, 20, VIPticket.notVIP, cashier);
+            Ticket t3 = new Ticket(12, 0, 2025, 6, 1, 20, 20, VIPticket.notVIP, cashier);
             Ticket t4 = new Ticket(18, 2023, 8, 30, 100, 90, VIPticket.isVIP, cashier);
 
             System.out.println(t1);
