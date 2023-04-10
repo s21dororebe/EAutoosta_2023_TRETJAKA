@@ -17,6 +17,9 @@ public class Ticket {
     private Cashier cashierPerson;
     private boolean isVIP = false;
 
+    public long getGeneratedId() {
+        return generatedId;
+    }
     public Date getTicketPurchaseDate() {
         return ticketPurchaseDate;
     }
