@@ -20,15 +20,14 @@ public class MainServiceC {
     public static void main(String[] args) {
         try {
             Person person = new Person("John", "Washington", "123564-25698");
-            Employee e2 = new Employee("March", "Summer", "123456-78963", 2025, 4, 9);
-            Employee e3 = new Employee(person, 2023, 3, 28);
+            Employee employee = new Employee("March", "Summer", "123456-78963", 2025, 4, 9);
 
             System.out.println("Creating:");
-            BusDriver busDriver1 = new BusDriver(e2, 5);
+            BusDriver busDriver1 = new BusDriver(employee, 5);
             System.out.println(busDriver1);
 
             ArrayList<BusDriver> busDriverList = new ArrayList<>();
-            BusDriver busDriver2 = new BusDriver(e3, 10);
+            BusDriver busDriver2 = new BusDriver(person, 2023, 3, 28, 10);
 
             BusDriver busDriver3 = new BusDriver("Ethan", "Reynolds", "670312-98123", 2024, 1, 1, 10);
             busDriver3.addCategory(BusCategory.minibus);
@@ -40,6 +39,9 @@ public class MainServiceC {
             BusDriver busDriver5 = new BusDriver("Isaac", "Ramirez", "820714-32067", 2024, 1, 1, 8);
             busDriver5.addCategory(BusCategory.minibus);
             busDriver5.addCategory(BusCategory.schoolbus);
+            //Removing function is also working
+            busDriver5.addCategory(BusCategory.largebus);
+            busDriver5.removeCategory(BusCategory.largebus);
 
             BusDriver busDriver6 = new BusDriver("Emily", "Kim", "550223-42108", 2024, 1, 1, 7);
             busDriver6.addCategory(BusCategory.schoolbus);
