@@ -4,7 +4,13 @@ import model.Station;
 import model.enumerators.City;
 import model.extraClasses.WorkingTime;
 
-public class MainServiceStation {
+/*
+ * @info Station class
+ * Darbības ar staciju jeb Station objektiem(3 punkti)
+    i. Pievienot jaunu staciju;
+ * */
+
+public class MainServiceD {
     public static void main(String[] args) {
         try {
             WorkingTime wt1 = new WorkingTime(12, 0, 13, 0);

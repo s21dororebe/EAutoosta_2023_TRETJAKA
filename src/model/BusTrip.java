@@ -130,8 +130,6 @@ public class BusTrip {
                 } else timeFrom = new Time(inputTimeFrom.getHour(), inputTimeFrom.getMinute()); // >
             } else throw (new Exception("Invalid input year from"));
 //---------------------------------------------------------------------------------------------------------------------------------
-
-
             if(dateTo.getYear() >= dateFrom.getYear()){
                 //==
                 if(dateTo.getYear() == dateFrom.getYear()){
