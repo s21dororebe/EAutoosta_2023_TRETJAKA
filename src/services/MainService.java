@@ -8,7 +8,13 @@ import model.extraClasses.Date;
 import model.extraClasses.Time;
 import model.extraClasses.WorkingTime;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+
+import static java.util.Collections.addAll;
 
 public class MainService {
 
@@ -216,6 +222,27 @@ public class MainService {
             System.out.println("All bus trips from Flowers station, Ventspils:");
             for(BusTrip temp : findAllBusTripsFromStationToday(stationArrayList.get(6)))
                 System.out.println(temp);
+            System.out.println("------------------------------");
+            System.out.println("Income of the cashier with person code [200589-12459] : " + howManyIncomeTodayByCashier("200589-12459"));
+            System.out.println("------------------------------");
+            System.out.println("All VIP Tickets For Today : ");
+            for(Ticket temp : findAllVipTicketsForToday())
+                System.out.println(temp);
+            System.out.println("------------------------------");
+            System.out.println("------------------------------");
+            System.out.println("------------------------------");
+            System.out.println("------------------------------");
+            System.out.println("------------------------------");
+            System.out.println("------------------------------");
+            System.out.println("------------------------------");
+            System.out.println("------------------------------");
+            System.out.println("------------------------------");
+
+            for(int i = 0; i < 100000; i++)
+                generateBusTripsFromAllStationsToAllStationsThisWeek();
+
+//            for(BusTrip temp : busTripArrayList)
+//                System.out.println(temp);
 
         } catch (Exception e){
             System.out.println(e);
@@ -371,11 +398,115 @@ public class MainService {
         }
         return false;
     }
-    /*
-    public static float howManyIncomeTodayByCashier(String personCode){}
-    public static ArrayList<Ticket> findAllVipTicketsForToday(){}
-    public static ArrayList<BusTrip> sortBusTripByTimeToday(Station station){}
-    public static void generateBusTripsFromAllStationsToAllStationsThisWeek(){}*/
+    //TODO to test following 3 functions you need to change the date of the bus trips, don't forget - they need to be today but in the future by the time
+    public static float howManyIncomeTodayByCashier(String personCode){
+        float result = 0;
+
+        for(BusTrip tempBusTrip : busTripArrayList){
+            if(tempBusTrip.getDateFrom().getYear() == LocalDateTime.now().getYear()
+                    && tempBusTrip.getDateFrom().getMonth() == LocalDateTime.now().getMonthValue()
+                    && tempBusTrip.getDateFrom().getDay() == LocalDateTime.now().getDayOfMonth()) {
+                ArrayList<Ticket> tempTicketList = findAllTicketForBusTrip(tempBusTrip.getStationFrom(), tempBusTrip.getStationTo(), tempBusTrip.getTimeFrom(), tempBusTrip.getDateFrom());
+                if(!tempTicketList.isEmpty()){
+                    for(Ticket ticket : tempTicketList){
+                        if(Objects.equals(ticket.getCashierPerson().getPersonCode(), personCode)){
+                            result += ticket.getPrice();
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    public static ArrayList<Ticket> findAllVipTicketsForToday(){
+        ArrayList<Ticket> tempList = new ArrayList<>();
+
+        for(BusTrip tempBusTrip : busTripArrayList){
+            if(tempBusTrip.getDateFrom().getYear() == LocalDateTime.now().getYear()
+                    && tempBusTrip.getDateFrom().getMonth() == LocalDateTime.now().getMonthValue()
+                    && tempBusTrip.getDateFrom().getDay() == LocalDateTime.now().getDayOfMonth()) {
+                ArrayList<Ticket> tempTicketList = findAllTicketForBusTrip(tempBusTrip.getStationFrom(), tempBusTrip.getStationTo(), tempBusTrip.getTimeFrom(), tempBusTrip.getDateFrom());
+                if(!tempTicketList.isEmpty()){
+                    for(Ticket ticket : tempTicketList){
+                        if(ticket.isVIP()){
+                            tempList.add(ticket);
+                        }
+                    }
+                }
+            }
+        }
+        return tempList;
+    }
+    public static ArrayList<BusTrip> sortBusTripByTimeToday(Station station){
+        ArrayList<BusTrip> tempBusTripListResult = findAllBusTripsFromStationToday(station);
+        //copy this list started from index=1 element
+        ArrayList<BusTrip> tempBusTripListTemp = new ArrayList<>(tempBusTripListResult);
+        tempBusTripListTemp.remove(0);
+
+        for(BusTrip tempBusTripI : tempBusTripListResult){
+            for(BusTrip tempBusTripJ : tempBusTripListTemp){
+                if(tempBusTripI.getTimeFrom().getHour() > tempBusTripJ.getTimeFrom().getHour()){
+                    BusTrip temp = tempBusTripI;
+                    tempBusTripI = tempBusTripJ;
+                    tempBusTripJ = temp;
+                } else if(tempBusTripI.getTimeFrom().getHour() == tempBusTripJ.getTimeFrom().getHour()){
+                    if(tempBusTripI.getTimeFrom().getMinute() > tempBusTripJ.getTimeFrom().getMinute()){
+                        BusTrip temp = tempBusTripI;
+                        tempBusTripI = tempBusTripJ;
+                        tempBusTripJ = temp;
+                    }
+                }
+            }
+        }
+
+        return tempBusTripListResult;
+    }
+
+    //TODO create more drivers
+    public static void generateBusTripsFromAllStationsToAllStationsThisWeek() throws Exception {
+        ArrayList<Station> tempStationArrayList = new ArrayList<>(stationArrayList);
+        tempStationArrayList.remove(0);
+        ArrayList<Integer> numberOfSeats = new ArrayList<>(Arrays.asList(20, 30, 40, 50));
+
+        for(Station tempStationFrom : stationArrayList){
+            //Station inputStationFrom, Station inputStationTo, Time timeFrom, Time timeTo, Date dateFrom, Date dateTo, int inputNumberOfSeats, BusDriver inputDriver
+            //generate time and date
+            for(Station tempStationTo : tempStationArrayList){
+                if(tempStationTo.getCity() != tempStationFrom.getCity()){
+                    Date randomDate = new Date(createRandomDate().getYear(), createRandomDate().getMonthValue(), createRandomDate().getDayOfMonth());
+                    Time randomTime = createRandomTime();
+                    int index = createRandomIntBetween(0, 3);
+                    int timeIndex = createRandomIntBetween(1, 3);
+                    int seats = numberOfSeats.get(index);
+                    if (seats < 30){
+                        addNewBusTrip(tempStationFrom, tempStationTo, randomTime,
+                                new Time(randomTime.getHour()+timeIndex, randomTime.getMinute()), randomDate, randomDate, seats,
+                                findBusDriverForCategory(BusCategory.minibus).get(0));
+                    } else addNewBusTrip(tempStationFrom, tempStationTo, randomTime,
+                            new Time(randomTime.getHour()+timeIndex, randomTime.getMinute()), randomDate, randomDate, seats,
+                            findBusDriverForCategory(BusCategory.largebus).get(0));
+                }
+            }
+        }
+
+    }
+    /*https://www.logicbig.com/how-to/code-snippets/jcode-java-random-random-dates.html*/
+
+    public static int createRandomIntBetween(int start, int end) {
+        return start + (int) Math.round(Math.random() * (end - start));
+    }
+
+    public static LocalDate createRandomDate() {
+        int day = createRandomIntBetween(LocalDate.now().getDayOfMonth(), LocalDate.now().getDayOfMonth()+10);
+        return LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonthValue(), day);
+    }
+
+    public static Time createRandomTime() throws Exception {
+        int hourFrom = createRandomIntBetween(6, 20);
+        int minuteFrom = createRandomIntBetween(0, 59);
+        return new Time(hourFrom, minuteFrom);
+    }
+
 
 
 
