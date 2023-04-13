@@ -53,7 +53,7 @@ public class BusTrip {
 
     public void setStations(Station inputStationFrom, Station inputStationTo) throws Exception {
         if(inputStationFrom != null && inputStationTo != null){
-            if(inputStationFrom.getCity() != inputStationTo.getCity()){
+            if(inputStationFrom != inputStationTo && inputStationFrom.getCity() != inputStationTo.getCity()){
                 stationFrom = inputStationFrom;
                 stationTo = inputStationTo;
             } else throw (new Exception("Input stations are the same"));
