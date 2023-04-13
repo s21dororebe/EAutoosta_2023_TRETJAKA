@@ -193,26 +193,6 @@ public class BusTrip {
         }
     }
 
-    public BusTrip(Time timeFrom, Time timeTo, int yearFrom, int monthFrom, int dayFrom, int yearTo, int monthTo, int dayTo, Station inputStationFrom, Station inputStationTo, int inputNumberOfSeats, BusDriver inputDriver) throws Exception {
-        generatedId = idCounter;
-        idCounter++;
-
-        setDatesByYearMonthDay(yearFrom, monthFrom, dayFrom, yearTo, monthTo, dayTo);
-        setTimesByTimeObject(timeFrom, timeTo);
-        setStations(inputStationFrom, inputStationTo);
-        setNumberOfSeats(inputNumberOfSeats);
-        setDriver(inputDriver);
-    }
-    public BusTrip(int hourFrom, int minuteFrom, int hourTo, int minuteTo, Date dateFrom, Date dateTo, Station inputStationFrom, Station inputStationTo, int inputNumberOfSeats, BusDriver inputDriver) throws Exception {
-        generatedId = idCounter;
-        idCounter++;
-
-        setDatesByDateObject(dateFrom, dateTo);
-        setTimesByHourAndMinute(hourFrom, minuteFrom, hourTo, minuteTo);
-        setStations(inputStationFrom, inputStationTo);
-        setNumberOfSeats(inputNumberOfSeats);
-        setDriver(inputDriver);
-    }
     public BusTrip(int hourFrom, int minuteFrom, int hourTo, int minuteTo, int yearFrom, int monthFrom, int dayFrom, int yearTo, int monthTo, int dayTo, Station inputStationFrom, Station inputStationTo, int inputNumberOfSeats, BusDriver inputDriver) throws Exception {
         generatedId = idCounter;
         idCounter++;
