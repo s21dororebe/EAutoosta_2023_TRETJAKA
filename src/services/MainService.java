@@ -23,7 +23,7 @@ public class MainService {
     public static ArrayList<Station> stationArrayList = new ArrayList<>();
     public static void main(String[] args) {
         try {
-            Person pe1 = new Person("James", "Jordan", "120599-65896");
+            /*Person pe1 = new Person("James", "Jordan", "120599-65896");
             Employee e1 = new Employee(pe1, 2023, 5, 1);
             Employee e2 = new Employee("Elena", "Grey", "180974-45236", 2023, 6, 1);
             Employee e3 = new Employee("Michael", "Philips", "181296-23641", 2023, 7, 1);
@@ -114,8 +114,7 @@ public class MainService {
             System.out.println("Changing driver to Bus trip 2:");
             System.out.println("Bus Trip 1: " + busTripArrayList.get(1));
             bt2.changeBusDriver(bd3);
-            System.out.println("Bus Trip 1: " + busTripArrayList.get(1));
-
+            System.out.println("Bus Trip 1: " + busTripArrayList.get(1));*/
             ///CASHIERS
             System.out.println("------------------------------");
             System.out.println("Cashier list before:");
@@ -185,42 +184,42 @@ public class MainService {
 
             //STATION
             System.out.println("Stations");
-            addNewStation(City.Ventspils, "Flowers station", new WorkingTime(6, 23)); //id 6
-            addNewStation(City.Jelgava, "Cats station", new WorkingTime(5, 30, 23, 30)); //id 7
-            addNewStation(City.Liepaja, "Dogs station", new WorkingTime(5, 22)); //id 8
+            addNewStation(City.Ventspils, "Flowers station", new WorkingTime(6, 23)); //id 0
+            addNewStation(City.Jelgava, "Cats station", new WorkingTime(5, 30, 23, 30)); //id 1
+            addNewStation(City.Liepaja, "Dogs station", new WorkingTime(5, 22)); //id 2
             for(Station temp : stationArrayList)
                 System.out.println(temp);
             System.out.println("------------------------------");
 
             System.out.println("Bus trips");
-            //following bus trips have indexes 6-8
-            addNewBusTrip(stationArrayList.get(6), stationArrayList.get(7), new Time(12), new Time(13), new Date(2023, 5, 9), new Date(2023, 5, 9), 20, findBusDriverForCategory(BusCategory.minibus).get(0));
-            addNewBusTrip(stationArrayList.get(7), stationArrayList.get(8), new Time(15, 30), new Time(16, 30), new Date(2023, 5, 10), new Date(2023, 5, 10), 40, findBusDriverForCategory(BusCategory.largebus).get(0));
-            addNewBusTrip(stationArrayList.get(6), stationArrayList.get(8), new Time(17, 30), new Time(18, 30), new Date(2023, 5, 11), new Date(2023, 5, 11), 20, findBusDriverForCategory(BusCategory.schoolbus).get(0));
+            //following bus trips have indexes 0-2
+            addNewBusTrip(stationArrayList.get(0), stationArrayList.get(1), new Time(12), new Time(13), new Date(2023, 5, 9), new Date(2023, 5, 9), 20, findBusDriverForCategory(BusCategory.minibus).get(0));
+            addNewBusTrip(stationArrayList.get(1), stationArrayList.get(2), new Time(15, 30), new Time(16, 30), new Date(2023, 5, 10), new Date(2023, 5, 10), 40, findBusDriverForCategory(BusCategory.largebus).get(0));
+            addNewBusTrip(stationArrayList.get(0), stationArrayList.get(2), new Time(17, 30), new Time(18, 30), new Date(2023, 5, 11), new Date(2023, 5, 11), 20, findBusDriverForCategory(BusCategory.schoolbus).get(0));
             for(BusTrip temp : busTripArrayList)
                 System.out.println(temp);
             System.out.println("------------------------------");
 
             System.out.println("Adding tickets");
-            System.out.println(busTripArrayList.get(6));
-            addTicketToBusTrip(new Time(12), new Date(2023, 6, 1), 20, 10, VIPticket.notVIP, findAllCashiers().get(0), stationArrayList.get(6), stationArrayList.get(7));
-            addTicketToBusTrip(new Time(13), new Date(2023, 6, 1), 15, 0, VIPticket.isVIP, findAllCashiers().get(0), stationArrayList.get(6), stationArrayList.get(7));
-            addTicketToBusTrip(new Time(14), new Date(2023, 6, 1), 20, 10, VIPticket.notVIP, findAllCashiers().get(0), stationArrayList.get(6), stationArrayList.get(7));
+            System.out.println(busTripArrayList.get(0));
+            addTicketToBusTrip(new Time(12), new Date(2023, 6, 1), 20, 10, VIPticket.notVIP, findAllCashiers().get(0), stationArrayList.get(0), stationArrayList.get(1));
+            addTicketToBusTrip(new Time(13), new Date(2023, 6, 1), 15, 0, VIPticket.isVIP, findAllCashiers().get(0), stationArrayList.get(0), stationArrayList.get(1));
+            addTicketToBusTrip(new Time(14), new Date(2023, 6, 1), 20, 10, VIPticket.notVIP, findAllCashiers().get(0), stationArrayList.get(0), stationArrayList.get(1));
             System.out.println("Adding tickets to a bus trip...");
-            for(Ticket temp : findAllTicketForBusTrip(stationArrayList.get(6), stationArrayList.get(7), new Time(12), new Date(2023, 5, 9)))
+            for(Ticket temp : findAllTicketForBusTrip(stationArrayList.get(0), stationArrayList.get(1), new Time(12), new Date(2023, 5, 9)))
                 System.out.println(temp);
 
             System.out.println();
-            System.out.println(busTripArrayList.get(7));
-            addTicketToBusTrip(new Time(15, 30), new Date(2023, 5, 10), 50, 15, VIPticket.isVIP, findAllCashiers().get(1), stationArrayList.get(7), stationArrayList.get(8));
-            addTicketToBusTrip(new Time(16, 30), new Date(2023, 5, 10), 20, 10, VIPticket.notVIP, findAllCashiers().get(1), stationArrayList.get(7), stationArrayList.get(8));
+            System.out.println(busTripArrayList.get(1));
+            addTicketToBusTrip(new Time(15, 30), new Date(2023, 5, 10), 50, 15, VIPticket.isVIP, findAllCashiers().get(1), stationArrayList.get(1), stationArrayList.get(2));
+            addTicketToBusTrip(new Time(16, 30), new Date(2023, 5, 10), 20, 10, VIPticket.notVIP, findAllCashiers().get(1), stationArrayList.get(1), stationArrayList.get(2));
             System.out.println("Adding tickets to a bus trip...");
-            for(Ticket temp : findAllTicketForBusTrip(stationArrayList.get(7), stationArrayList.get(8), new Time(15, 30), new Date(2023, 5, 10)))
+            for(Ticket temp : findAllTicketForBusTrip(stationArrayList.get(1), stationArrayList.get(2), new Time(15, 30), new Date(2023, 5, 10)))
                 System.out.println(temp);
             System.out.println("------------------------------");
-            System.out.println("The number of free seats on the BusTrip 6 : " + howManyFreeSeatsOnBusTrip(stationArrayList.get(6), stationArrayList.get(7), new Time(12), new Date(2023, 5, 9)));
+            System.out.println("The number of free seats on the BusTrip 0 : " + howManyFreeSeatsOnBusTrip(stationArrayList.get(0), stationArrayList.get(1), new Time(12), new Date(2023, 5, 9)));
             System.out.println("All bus trips from Flowers station, Ventspils:");
-            for(BusTrip temp : findAllBusTripsFromStationToday(stationArrayList.get(6)))
+            for(BusTrip temp : findAllBusTripsFromStationToday(stationArrayList.get(0)))
                 System.out.println(temp);
             System.out.println("------------------------------");
             System.out.println("Income of the cashier with person code [200589-12459] : " + howManyIncomeTodayByCashier("200589-12459"));
@@ -229,20 +228,13 @@ public class MainService {
             for(Ticket temp : findAllVipTicketsForToday())
                 System.out.println(temp);
             System.out.println("------------------------------");
-            System.out.println("------------------------------");
-            System.out.println("------------------------------");
-            System.out.println("------------------------------");
-            System.out.println("------------------------------");
-            System.out.println("------------------------------");
-            System.out.println("------------------------------");
-            System.out.println("------------------------------");
-            System.out.println("------------------------------");
+            System.out.println("Schedule for next week: ");
+            generateBusTripsFromAllStationsToAllStationsThisWeek();
+            for(BusTrip temp : busTripArrayList)
+                System.out.println(temp);
 
-            for(int i = 0; i < 100000; i++)
-                generateBusTripsFromAllStationsToAllStationsThisWeek();
+            generateBusTripsFromAllStationsToAllStationsThisWeek();
 
-//            for(BusTrip temp : busTripArrayList)
-//                System.out.println(temp);
 
         } catch (Exception e){
             System.out.println(e);
@@ -462,7 +454,6 @@ public class MainService {
         return tempBusTripListResult;
     }
 
-    //TODO create more drivers
     public static void generateBusTripsFromAllStationsToAllStationsThisWeek() throws Exception {
         ArrayList<Station> tempStationArrayList = new ArrayList<>(stationArrayList);
         tempStationArrayList.remove(0);
@@ -497,7 +488,7 @@ public class MainService {
     }
 
     public static LocalDate createRandomDate() {
-        int day = createRandomIntBetween(LocalDate.now().getDayOfMonth(), LocalDate.now().getDayOfMonth()+10);
+        int day = createRandomIntBetween(LocalDate.now().getDayOfMonth(), LocalDate.now().getDayOfMonth()+7);
         return LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonthValue(), day);
     }
 
